@@ -16,8 +16,8 @@
 
 
 -- Listage de la structure de la base pour forum
-CREATE DATABASE IF NOT EXISTS `forum` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `forum`;
+CREATE DATABASE IF NOT EXISTS `forum_ledlev` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `forum_ledlev`;
 
 
 

@@ -29,18 +29,18 @@ abstract class Manager{
         );
     }
     
+    
     public function findOneById($id){
-
         $sql = "SELECT *
-                FROM ".$this->tableName." a
-                WHERE a.id_".$this->tableName." = :id
-                ";
-
+                FROM ".$this->tableName." c
+                WHERE c.id_category = :id";
+    
         return $this->getOneOrNullResult(
             DAO::select($sql, ['id' => $id], false), 
             $this->className
         );
     }
+    
 
     //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
 

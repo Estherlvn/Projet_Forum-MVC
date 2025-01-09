@@ -3,9 +3,10 @@
     $topics = $result["data"]['topics']; 
 ?>
 
-<h1>Liste des topics</h1>
+<h1>Liste des topics :</h1>
 
 <?php
-foreach($topics as $topic ){ ?>
-    <p><a href="#"><?= $topic ?></a> par <?= $topic->getUser() ?></p>
-<?php }
+foreach($topics as $topic) {
+    echo "<p><a href=\"#\">" . $topic->getTopicName() . "</a> par " . $topic->getUser()->getPseudo() . "</p>";
+}
+?>

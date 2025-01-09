@@ -3,58 +3,52 @@ namespace Model\Entities;
 
 use App\Entity;
 
-/*
-    En programmation orientée objet, une classe finale (final class) est une classe que vous ne pouvez pas étendre, c'est-à-dire qu'aucune autre classe ne peut hériter de cette classe. En d'autres termes, une classe finale ne peut pas être utilisée comme classe parente.
-*/
+final class Category extends Entity {
 
-final class Category extends Entity{
+    private $id_category; // Correspond à la colonne id_category
+    private $categoryName; // Correspond à la colonne categoryName
 
-    private $id;
-    private $name;
-
-    // chaque entité aura le même constructeur grâce à la méthode hydrate (issue de App\Entity)
     public function __construct($data){         
         $this->hydrate($data);        
     }
 
     /**
-     * Get the value of id
+     * Get the value of id_category
      */ 
-    public function getId()
+    public function getIdCategory()
     {
-        return $this->id;
+        return $this->id_category;
     }
 
     /**
-     * Set the value of id
+     * Set the value of id_category
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setIdCategory($id_category)
     {
-        $this->id = $id;
-
+        $this->id_category = $id_category;
         return $this;
     }
 
     /**
-     * Get the value of name
+     * Get the value of categoryName
      */ 
-    public function getName(){
-        return $this->name;
+    public function getCategoryName(){
+        return $this->categoryName;
     }
 
     /**
-     * Set the value of name
+     * Set the value of categoryName
      *
      * @return  self
      */ 
-    public function setName($name){
-        $this->name = $name;
+    public function setCategoryName($categoryName){
+        $this->categoryName = $categoryName;
         return $this;
     }
 
     public function __toString(){
-        return $this->name;
+        return $this->categoryName; // Affiche le nom de la catégorie
     }
 }

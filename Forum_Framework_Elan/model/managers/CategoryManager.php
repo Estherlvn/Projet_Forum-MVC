@@ -13,4 +13,20 @@ class CategoryManager extends Manager{
     public function __construct(){
         parent::connect();
     }
+
+
+    // Ajouter une méthode spécifique pour une requête personnalisée
+    public function findAllCategories() {
+        
+        $sql = "SELECT * FROM ".$this->tableName." ORDER BY categoryName ASC";
+        return $this->getMultipleResults(
+            DAO::select($sql),
+            $this->className
+        );
+    }
+    
+
+
+
+
 }

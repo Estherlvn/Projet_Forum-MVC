@@ -3,75 +3,122 @@ namespace Model\Entities;
 
 use App\Entity;
 
-/*
-    En programmation orientée objet, une classe finale (final class) est une classe que vous ne pouvez pas étendre, c'est-à-dire qu'aucune autre classe ne peut hériter de cette classe. En d'autres termes, une classe finale ne peut pas être utilisée comme classe parente.
-*/
+final class Topic extends Entity {
 
-final class Topic extends Entity{
+    private $id_topic;
+    private $topicName;
+    private $topicDate;
+    private $topicStatus;
+    private $membre_id;  // Clé étrangère pour l'utilisateur
+    private $category_id;  // Clé étrangère pour la catégorie
 
-    private $id;
-    private $title;
-    private $user;
-    private $category;
-    private $creationDate;
-    private $closed;
-
-    public function __construct($data){         
-        $this->hydrate($data);        
+    public function __construct($data) {
+        $this->hydrate($data);
     }
 
     /**
-     * Get the value of id
+     * Get the value of id_topic
      */ 
-    public function getId(){
-        return $this->id;
+    public function getId() {
+        return $this->id_topic;
     }
 
     /**
-     * Set the value of id
+     * Set the value of id_topic
      *
      * @return  self
      */ 
-    public function setId($id){
-        $this->id = $id;
+    public function setId($id_topic) {
+        $this->id_topic = $id_topic;
         return $this;
     }
 
     /**
-     * Get the value of title
+     * Get the value of topicName
      */ 
-    public function getTitle(){
-        return $this->title;
+    public function getTopicName() {
+        return $this->topicName;
     }
 
     /**
-     * Set the value of title
+     * Set the value of topicName
      *
      * @return  self
      */ 
-    public function setTitle($title){
-        $this->title = $title;
+    public function setTopicName($topicName) {
+        $this->topicName = $topicName;
         return $this;
     }
 
     /**
-     * Get the value of user
+     * Get the value of topicDate
      */ 
-    public function getUser(){
-        return $this->user;
+    public function getTopicDate() {
+        return $this->topicDate;
     }
 
     /**
-     * Set the value of user
+     * Set the value of topicDate
      *
      * @return  self
      */ 
-    public function setUser($user){
-        $this->user = $user;
+    public function setTopicDate($topicDate) {
+        $this->topicDate = $topicDate;
         return $this;
     }
 
-    public function __toString(){
-        return $this->title;
+    /**
+     * Get the value of topicStatus
+     */ 
+    public function getTopicStatus() {
+        return $this->topicStatus;
+    }
+
+    /**
+     * Set the value of topicStatus
+     *
+     * @return  self
+     */ 
+    public function setTopicStatus($topicStatus) {
+        $this->topicStatus = $topicStatus;
+        return $this;
+    }
+
+    /**
+     * Get the value of membre_id
+     */ 
+    public function getMembreId() {
+        return $this->membre_id;
+    }
+
+    /**
+     * Set the value of membre_id
+     *
+     * @return  self
+     */ 
+    public function setMembreId($membre_id) {
+        $this->membre_id = $membre_id;
+        return $this;
+    }
+
+    /**
+     * Get the value of category_id
+     */ 
+    public function getCategoryId() {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     *
+     * @return  self
+     */ 
+    public function setCategoryId($category_id) {
+        $this->category_id = $category_id;
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->topicName;
     }
 }

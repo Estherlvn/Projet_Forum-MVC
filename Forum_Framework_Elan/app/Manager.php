@@ -31,9 +31,7 @@ abstract class Manager{
     
     
     public function findOneById($id){
-        $sql = "SELECT *
-                FROM ".$this->tableName." c
-                WHERE c.id_category = :id";
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id_" . $this->tableName . " = :id";
     
         return $this->getOneOrNullResult(
             DAO::select($sql, ['id' => $id], false), 

@@ -11,6 +11,18 @@ foreach($topics as $topic) {
     echo "<p><a href=\"index.php?ctrl=forum&action=listPostsByTopic&id=" . $topic->getId() . "\">" . 
         htmlspecialchars($topic->getTopicName()) . "</a> créé par " . 
         htmlspecialchars($topic->getMembre()->getPseudo()) . 
-        " le " . $topicDate->format('d F Y - H:i') . "</p>";
+        " le " . $topicDate->format('d/m/Y - H:i') . "</p>";
 }
 ?>
+
+
+<h2>Créer un nouveau topic</h2>
+
+<form method="POST" action="index.php?ctrl=forum&action=createTopic">
+    <label for="topicName">Nom du Topic :</label>
+    <input type="text" id="topicName" name="topicName" required>
+    
+    <input type="hidden" name="category_id" value="<?= $category->getId(); ?>">
+
+    <button type="submit">Créer le Topic</button>
+</form>

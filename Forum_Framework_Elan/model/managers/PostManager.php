@@ -22,7 +22,8 @@ class PostManager extends Manager{
                 FROM ".$this->tableName." p
                 INNER JOIN topic t ON p.topic_id = t.id_topic
                 INNER JOIN membre m ON p.membre_id = m.id_membre
-                WHERE p.topic_id = :id";
+                WHERE p.topic_id = :id
+                ORDER BY postDate ASC";
        
 
         // Exécution de la requête et récupération des résultats
@@ -32,6 +33,7 @@ class PostManager extends Manager{
         // Retourner les résultats en utilisant la méthode getMultipleResults
         return $this->getMultipleResults($results, $this->className);
     }
+
     
     
 }

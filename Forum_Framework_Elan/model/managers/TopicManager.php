@@ -24,14 +24,15 @@ class TopicManager extends Manager{
                 INNER JOIN membre m ON t.membre_id = m.id_membre
                 WHERE t.category_id = :id";
        
-
         // Exécution de la requête et récupération des résultats
         $results = DAO::select($sql, ['id' => $id]);
 
-        
         // Retourner les résultats en utilisant la méthode getMultipleResults
         return $this->getMultipleResults($results, $this->className);
     }
-    
-    
+
+    // Ajouter un topic
+    public function add($data) {
+        return parent::add($data);  // Appeler la méthode add du parent (Manager.php)
+    }
 }

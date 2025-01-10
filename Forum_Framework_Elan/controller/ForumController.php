@@ -34,8 +34,8 @@ class ForumController extends AbstractController implements ControllerInterface{
         $category = $categoryManager->findOneById($id);
         $topics = $topicManager->findTopicsByCategory($id);
     
-        // Debugging: vérifier que $topics contient bien des données
-        var_dump($topics);
+        // // Debugging: vérifier que $topics contient bien des données
+        // var_dump($topics);
     
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
@@ -53,7 +53,6 @@ class ForumController extends AbstractController implements ControllerInterface{
         // Récupérer tous les membres
         $membres = $membreManager->findAll();
 
-        var_dump($membres);
 
         return [
             "view" => VIEW_DIR . "forum/listMembres.php", // Chemin de la vue

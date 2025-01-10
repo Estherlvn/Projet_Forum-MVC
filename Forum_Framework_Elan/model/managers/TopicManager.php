@@ -28,7 +28,6 @@ class TopicManager extends Manager{
         // Exécution de la requête et récupération des résultats
         $results = DAO::select($sql, ['id' => $id]);
 
-        var_dump($results);
         
         // Retourner les résultats en utilisant la méthode getMultipleResults
         return $this->getMultipleResults($results, $this->className);

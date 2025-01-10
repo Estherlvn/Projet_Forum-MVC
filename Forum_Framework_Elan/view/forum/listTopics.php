@@ -7,6 +7,6 @@
 
 <?php
 foreach($topics as $topic) {
-    echo "<p><a href=\"#\">" . $topic->getTopicName() . "</a> par " . $topic->getUser()->getPseudo() . "</p>";
+    echo "<p><a href=\"#\">" . $topic->getTopicName() . "</a> par " . $topic->getMembre()->getPseudo() . "</p>";
 }
 ?>

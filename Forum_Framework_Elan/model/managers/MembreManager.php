@@ -4,7 +4,7 @@ namespace Model\Managers;
 use App\Manager;
 use App\DAO;
 
-class UserManager extends Manager {
+class MembreManager extends Manager {
 
     protected $className = "Model\Entities\User";
     protected $tableName = "membre";
@@ -14,8 +14,9 @@ class UserManager extends Manager {
     }
 
     // Récupérer tous les membres
-    public function findAll() {
-        $sql = "SELECT * FROM ".$this->tableName;
+    public function findAll($order = null) {
+        $orderQuery = ($order) ? "ORDER BY ".$order[0]." ".$order[1] : "";
+        $sql = "SELECT * FROM ".$this->tableName." ".$orderQuery;
         
         // La méthode renvoie une liste de résultats
         return $this->getMultipleResults(

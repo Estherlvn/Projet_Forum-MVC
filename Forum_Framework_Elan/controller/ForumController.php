@@ -6,7 +6,7 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\CategoryManager;
 use Model\Managers\TopicManager;
-use Model\Managers\UserManager;
+use Model\Managers\MembreManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -49,9 +49,11 @@ class ForumController extends AbstractController implements ControllerInterface{
     
 
     public function listMembres() {
-        $userManager = new UserManager();
+        $userManager = new MembreManager();
         // Récupérer tous les membres
-        $membres = $userManager->findAll();
+        $membres = $membreManager->findAll();
+
+        var_dump($membres);
 
         return [
             "view" => VIEW_DIR . "forum/listMembres.php", // Chemin de la vue

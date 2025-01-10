@@ -9,7 +9,7 @@ use App\Entity;
 
 final class User extends Entity{
 
-    private $id_membre;
+    private $id; // correspond à la clé primaire id_membre dans BDD
     private $email;
     private $pseudo;
     private $mdp;
@@ -24,7 +24,7 @@ final class User extends Entity{
      * Get the value of id_membre
      */ 
     public function getId(){
-        return $this->id_membre;
+        return $this->id;
     }
 
     /**
@@ -33,7 +33,7 @@ final class User extends Entity{
      * @return  self
      */ 
     public function setId($id){
-        $this->id_membre = $id;
+        $this->id = $id;
         return $this;
     }
 

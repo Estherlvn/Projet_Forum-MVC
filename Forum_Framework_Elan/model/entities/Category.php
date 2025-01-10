@@ -5,7 +5,7 @@ use App\Entity;
 
 final class Category extends Entity {
 
-    private $id_category; // Correspond à la colonne id_category
+    private $id; // Correspond à la colonne id_category
     private $categoryName; // Correspond à la colonne categoryName
 
     public function __construct($data){         
@@ -15,9 +15,9 @@ final class Category extends Entity {
     /**
      * Get the value of id_category
      */ 
-    public function getIdCategory()
+    public function getId()
     {
-        return $this->id_category;
+        return $this->id;
     }
 
     /**
@@ -25,12 +25,13 @@ final class Category extends Entity {
      *
      * @return  self
      */ 
-    public function setIdCategory($id_category)
+    public function setId($id)
     {
-        $this->id_category = $id_category;
+        $this->id = $id;
         return $this;
     }
 
+    
     /**
      * Get the value of categoryName
      */ 

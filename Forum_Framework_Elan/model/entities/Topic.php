@@ -5,37 +5,38 @@ use App\Entity;
 
 final class Topic extends Entity {
 
-    private $id_topic;
+    private $id; // Correspond à la colonne id_topic dans BDD
     private $topicName;
     private $topicDate;
     private $topicStatus;
-    private $membre_id;  // Clé étrangère pour l'utilisateur
-    private $category_id;  // Clé étrangère pour la catégorie
+    private $membre;  // clé étrangère membre_id
+    private $category;  // clé étrangère category_id
 
     public function __construct($data) {
         $this->hydrate($data);
     }
 
     /**
-     * Get the value of id_topic
-     */ 
+     * Get the value of id
+     */
     public function getId() {
-        return $this->id_topic;
+        return $this->id;
     }
 
     /**
-     * Set the value of id_topic
+     * Set the value of id
      *
-     * @return  self
-     */ 
-    public function setId($id_topic) {
-        $this->id_topic = $id_topic;
+     * @param int $id
+     * @return self
+     */
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
 
     /**
      * Get the value of topicName
-     */ 
+     */
     public function getTopicName() {
         return $this->topicName;
     }
@@ -43,8 +44,9 @@ final class Topic extends Entity {
     /**
      * Set the value of topicName
      *
-     * @return  self
-     */ 
+     * @param string $topicName
+     * @return self
+     */
     public function setTopicName($topicName) {
         $this->topicName = $topicName;
         return $this;
@@ -52,7 +54,7 @@ final class Topic extends Entity {
 
     /**
      * Get the value of topicDate
-     */ 
+     */
     public function getTopicDate() {
         return $this->topicDate;
     }
@@ -60,8 +62,9 @@ final class Topic extends Entity {
     /**
      * Set the value of topicDate
      *
-     * @return  self
-     */ 
+     * @param \DateTime $topicDate
+     * @return self
+     */
     public function setTopicDate($topicDate) {
         $this->topicDate = $topicDate;
         return $this;
@@ -69,7 +72,7 @@ final class Topic extends Entity {
 
     /**
      * Get the value of topicStatus
-     */ 
+     */
     public function getTopicStatus() {
         return $this->topicStatus;
     }
@@ -77,44 +80,47 @@ final class Topic extends Entity {
     /**
      * Set the value of topicStatus
      *
-     * @return  self
-     */ 
+     * @param bool $topicStatus
+     * @return self
+     */
     public function setTopicStatus($topicStatus) {
         $this->topicStatus = $topicStatus;
         return $this;
     }
 
     /**
-     * Get the value of membre_id
-     */ 
-    public function getMembreId() {
-        return $this->membre_id;
+     * Get the value of membre
+     */
+    public function getMembre() {
+        return $this->membre;
     }
 
     /**
-     * Set the value of membre_id
+     * Set the value of membre
      *
-     * @return  self
-     */ 
-    public function setMembreId($membre_id) {
-        $this->membre_id = $membre_id;
+     * @param \Model\Entities\User $membre
+     * @return self
+     */
+    public function setMembre($membre) {
+        $this->membre = $membre;
         return $this;
     }
 
     /**
-     * Get the value of category_id
-     */ 
-    public function getCategoryId() {
-        return $this->category_id;
+     * Get the value of category
+     */
+    public function getCategory() {
+        return $this->category;
     }
 
     /**
-     * Set the value of category_id
+     * Set the value of category
      *
-     * @return  self
-     */ 
-    public function setCategoryId($category_id) {
-        $this->category_id = $category_id;
+     * @param \Model\Entities\Category $category
+     * @return self
+     */
+    public function setCategory($category) {
+        $this->category = $category;
         return $this;
     }
 

@@ -16,8 +16,16 @@ foreach($posts as $post ) {
 ?>
 
 <h2>Ajouter un nouveau post</h2>
-<form action="index.php?ctrl=forum&action=addPost" method="post">
-    <textarea name="content" placeholder="Écrivez votre message ici..." required></textarea><br>
-    <input type="hidden" name="topic_id" value="<?= htmlspecialchars($topic->getId()) ?>">
-    <button type="submit">Poster</button>
+
+<form method="POST" action="index.php?ctrl=forum&action=createPost&topicId=<?= $topic->getId() ?>">
+
+    
+    <textarea name="postContent" placeholder="Écrivez votre message ici..." required></textarea>
+
+    <!-- On passe l'ID du topic comme champ caché -->
+    <input type="hidden" name="topic_id" value="<?= $topic->getId() ?>">
+
+
+    <button type="submit">Créer le post</button>
 </form>
+

@@ -35,5 +35,10 @@ class PostManager extends Manager{
     }
 
     
+    // Ajouter un post
+    public function add($data) {
+        return parent::add($data);  // Appeler la méthode add du parent (Manager.php)
+    }
+    
     
 }

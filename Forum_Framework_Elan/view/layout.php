@@ -24,15 +24,15 @@
                 <header>
                     <!-- <-----NAV BAR----->
                     <nav class="navbar">
-                        <div id="nav-left">
-                            <a href="/">Accueil</a>
+                   
+                            <a href="index.php?ctrl=home&action=home">Accueil</a>
                             <?php
                             if(App\Session::isAdmin()){
                                 ?>
                                 <a href="index.php?ctrl=home&action=users">Voir la liste des membres</a>
                             <?php } ?>
-                        </div>
-                        <div id="nav-right">
+                     
+                        
                         <?php
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
@@ -49,7 +49,7 @@
                             <?php
                             }
                         ?>
-                        </div>
+                    
                     </nav>
                 </header>
                 
@@ -57,8 +57,8 @@
                     <?= $page ?>
                 </main>
             </div>
-            <footer>
-                <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions légales</a></p>
+            <footer id="footer">
+                <p>&copy; <?= date_create("now")->format("Y") ?>   <a href="#">Règlement du forum</a>  <a href="#">Mentions légales</a></p>
             </footer>
         </div>
         <script

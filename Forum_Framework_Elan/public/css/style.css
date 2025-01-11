@@ -5,34 +5,113 @@
   background-color: #f9f9f9;
 }
 
+/******* HOMEPAGE *******/
+
 .navbar {
-  height: 40px;
   font-family: "Karla", serif;
   font-weight: 500;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
   background-color: #618c76;
+  height: 50px;
 }
 
 .navbar a {
-  margin-right: 15px;
   text-decoration: none;
-  background-color: #618c76;
-  color: white;
+  background-color: #0b8da700;
+  color: rgb(255, 255, 255);
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+  font-size: smaller;
 }
 
 .homeS1 {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 60px;
   font-family: "Kulim Park", serif;
   font-weight: 550;
 }
 
-h1,
+h1 {
+  color: #618c76;
+  font-family: "Kulim Park", serif;
+  font-weight: 500;
+}
+
 h2 {
   color: #618c76;
   font-family: "Kulim Park", serif;
-  font-weight: 550;
+  font-weight: 450;
+}
+
+#login {
+  margin-top: 50px;
+}
+
+.homeButton {
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-size: smaller;
+  font-weight: 500;
+  border: solid 1px;
+  padding: 2px 5px 3px 5px;
+}
+
+.homeButton:hover {
+  background-color: #cce4c7;
+}
+
+/********* FORUM **********/
+
+#forum {
+  margin: 60px;
+}
+
+#forum a {
+  text-decoration: none;
+  font-family: "karla", serif;
+  color: black;
+  background-color: white;
+  border: solid 1px;
+  padding: 10px 20px;
+}
+
+#ListCat {
+  margin-bottom: 40px;
+}
+
+.categoryItem {
+  width: 200px;
+  margin-top: 50px;
+  margin-right: 20px;
+}
+
+/********* FOOTER *********/
+
+#footer {
+  font-family: "Karla", serif;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  background-color: #618c76;
+  height: 50px;
+}
+
+#footer p {
+  text-decoration: none;
+  background-color: #618c76;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: smaller;
+}
+
+#footer a {
+  background-color: #618c76;
+  text-decoration: none;
+  color: white;
+  margin-left: 40px;
 }

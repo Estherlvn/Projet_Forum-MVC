@@ -1,8 +1,9 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<div class=homeS1>
+    <h1>eQuotidien</h1>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
-
-<p>
-    <a href="index.php?ctrl=security&action=login">Se connecter</a>
-    <a href="index.php?ctrl=security&action=register">S'inscrire</a>
-</p>
+    <h2>Un forum pour tous, qui facilite la vie de chacun</h2>
+    <p>
+       <a href="index.php?ctrl=security&action=login">Se connecter</a>
+       <a href="index.php?ctrl=security&action=register">S'inscrire</a>
+    </p>
+</div>

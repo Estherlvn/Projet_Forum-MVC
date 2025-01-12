@@ -3,8 +3,10 @@
     $topics = $result["data"]['topics']; 
 ?>
 
+<div class="forumCat">
 <h1>Liste des topics de la catégorie <?= htmlspecialchars($category->getCategoryName()) ?></h1>
 
+<div id="listTopic">
 <?php
 foreach($topics as $topic) {
     $topicDate = new DateTime($topic->getTopicDate());
@@ -15,7 +17,7 @@ foreach($topics as $topic) {
 }
 ?>
 
-
+<div class="forumForm">
 <h2>Créer un nouveau topic</h2>
 
 <form method="POST" action="index.php?ctrl=forum&action=createTopic">
@@ -26,3 +28,5 @@ foreach($topics as $topic) {
 
     <button type="submit">Créer le Topic</button>
 </form>
+</div>
+</div>

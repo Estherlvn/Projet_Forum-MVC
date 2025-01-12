@@ -83,10 +83,23 @@ h2 {
   margin-bottom: 40px;
 }
 
+
 .categoryItem {
   width: 200px;
   margin-top: 50px;
   margin-right: 20px;
+}
+
+.forumCat {
+  display: flex;
+}
+
+#listTopic {
+    display: flex;
+  }
+
+.forumForm {
+  font-family: "karla", serif;
 }
 
 /********* FOOTER *********/

@@ -12,7 +12,7 @@ final class User extends Entity{
     private $id; // correspond à la clé primaire id_membre dans BDD
     private $email;
     private $pseudo;
-    private $mdp;
+    private $password;
     private $registrationDate;
     private $role;
 
@@ -74,8 +74,8 @@ final class User extends Entity{
     /**
      * Get the value of mdp (password)
      */ 
-    public function getMdp(){
-        return $this->mdp;
+    public function getPassword(){
+        return $this->password;
     }
 
     /**
@@ -83,8 +83,8 @@ final class User extends Entity{
      *
      * @return  self
      */ 
-    public function setMdp($mdp){
-        $this->mdp = $mdp;
+    public function setPassword($password){
+        $this->password = $password;
         return $this;
     }
 

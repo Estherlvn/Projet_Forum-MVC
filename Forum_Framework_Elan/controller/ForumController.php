@@ -49,12 +49,12 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
-public function listPostsByTopic($id) {
-    $postManager = new PostManager();
-    $topicManager = new TopicManager();
+    public function listPostsByTopic($id) {
+        $postManager = new PostManager();
+        $topicManager = new TopicManager();
     
-    // Récupérer le topic pour afficher son titre ou autres infos
-    $topic = $topicManager->findOneById($id);
+          // Récupérer le topic pour afficher son titre ou autres infos
+        $topic = $topicManager->findOneById($id);
     
     if (!$topic) {
         Session::addFlash('error', 'Le topic spécifié n\'existe pas.');
@@ -70,9 +70,9 @@ public function listPostsByTopic($id) {
         "data" => [
             "topic" => $topic,
             "posts" => $posts
-        ]
-    ];
-}
+             ]
+         ];
+    }
 
     public function listMembres() {
         $userManager = new MembreManager();
@@ -159,6 +159,6 @@ public function listPostsByTopic($id) {
     }
     
     
-    }
+}
 
 

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f9f9f9;
+
 }
 
 /******* HOMEPAGE *******/
@@ -34,8 +34,23 @@
   font-weight: 550;
 }
 
-.paraLine{
+.topicLine {
+  height: 40px;
   font-family: "karla", serif;
+  border: solid gray 0.5px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between; /*space-between entre title et details */
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.topicLine:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 .title {
@@ -43,8 +58,14 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 1.2em;
-  color:#2a4135;
+  color: #2a4135;
 }
+
+.details {
+  font-family: "karla", serif;
+  font-size: 0.9em;
+}
+
 
 h1 {
   color: #618c76;
@@ -89,7 +110,7 @@ h2 {
 /********* FORUM **********/
 
 #forum {
-  margin: 60px;
+  margin: 60px 150px;
 }
 
 
@@ -115,35 +136,68 @@ h2 {
 
 .forumCat {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .forumCat h1 {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-#listTopic {
+#listing {
     display: flex;
     flex-direction: column;
+    width: 40%;
   }
 
 
-/*********FORMULAIRES*********/
+/********* FORMULAIRES *********/
 
 .forumForm {
   font-family: "karla", serif;
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  border: solid gray 0.5px;
+  padding: 20px;
+  width: 345px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 2px;
+  
+}
+
+.forumForm form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.fieldForm {
+  margin-top: 5px;
+  margin-bottom: 12px;
+  width: 300px;
+  height: 25px;
+}
+
+.areaForm {
+  margin-top: 5px;
+  margin-bottom: 12px;
+  width: 300px;
+  height: 100px;
 }
 
 .sendButton {
   width: 80px;
   text-decoration: none;
-  background-color: white;
+  background-color: #FF912C;
   color: black;
   font-size: smaller;
   font-weight: 500;
   border: solid 1px;
   padding: 2px 4px 2px 4px;
+  margin-top: 10px;
+  margin-bottom: 6x;
   font-family: "karla", serif;
   font-size: 1em;
   display: flex;
@@ -152,7 +206,7 @@ h2 {
 }
 
 .sendButton:hover {
-  background-color: #cce4c7;
+  background-color: #f1ae70;
   cursor: pointer;
 }
 

@@ -128,59 +128,36 @@ public function listPostsByTopic($id) {
         }
     }
     
-
-
-    // créer un nouveau post
-    public function createPost($topicId) {
-        // Vérifier que le topic_id est valide (par exemple, vérifier s'il existe dans la base de données)
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($topicId); // Chercher un topic existant pour vérifier sa validité
-    
-        if (!$topic) {
-            // Si le topic n'existe pas, afficher une erreur ou rediriger
-            Session::addFlash('error', 'Le topic spécifié n\'existe pas.');
-            $this->redirectTo('forum', 'index'); // Ou rediriger vers la page d'accueil ou autre
-            return;
-        }
-    
-        // Si on est ici, le topic existe et l'utilisateur est sur la page de création du post
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupérer les données du formulaire
+    // CREER UN NOUVEAU POST dans un Topic
+    public function createPost() {
+        if (!empty($_POST['postContent']) && !empty($_POST['topic_id'])) {
             $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $membreId = 1; // Exemple : ici, le membre est 1, il faudra récupérer l'ID du membre via la session plus tard
+            $topicId = filter_input(INPUT_POST, 'topic_id', FILTER_VALIDATE_INT);
+            
+            // Récupérer l'ID du membre connecté (ajuster avec la session)
+            $membreId = 1;  // Utiliser un ID dynamique si nécessaire
     
-            // Si le contenu du post est vide, afficher une erreur
-            if (empty($postContent)) {
-                Session::addFlash('error', 'Le contenu du post ne peut pas être vide.');
-                $this->redirectTo('forum', 'createPost', $topicId);
-                return;
+            if ($topicId && $postContent) {
+                $postManager = new PostManager();
+                $postManager->add([
+                    'postContent' => $postContent,
+                    'topic_id' => $topicId,
+                    'membre_id' => $membreId,
+                    'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
+                ]);
+    
+                // Redirection vers le topic après la création du post
+                $this->redirectTo('forum', 'listPostsByTopic', $topicId);
+            } else {
+                Session::addFlash('error', 'Données invalides. Impossible de créer le post.');
+                $this->redirectTo('forum', 'listPostsByTopic', $topicId);
             }
-    
-            // Préparer les données du post
-            $postData = [
-                'postContent' => $postContent,
-                'topic_id' => $topicId,
-                'membre_id' => $membreId,
-                'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
-            ];
-    
-            // Ajouter le post via le PostManager
-            $postManager = new PostManager();
-            $postManager->add($postData);
-    
-            // Rediriger vers la liste des posts du topic
-            $this->redirectTo('forum', 'listPostsByTopic', $topicId);
+        } else {
+            Session::addFlash('error', 'Le contenu du post est requis.');
+            $this->redirectTo('forum', 'listPostsByTopic', $_POST['topic_id']);
         }
-    
-        // Si c'est un GET, afficher le formulaire de création du post
-        return [
-            "view" => VIEW_DIR."forum/listPosts.php",
-            "meta_description" => "Créer un nouveau post pour le topic : ".$topic->getTopicName(),
-            "data" => [
-                "topic" => $topic,  // Transmettre l'objet topic à la vue
-            ]
-        ];
     }
+    
     
     }
 

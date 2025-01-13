@@ -49,27 +49,30 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
-
-    public function listPostsByTopic($id) {
-        $postManager = new PostManager();
-        $topicManager = new TopicManager();
-        
-        // Récupérer le topic pour afficher son titre ou autres infos
-        $topic = $topicManager->findOneById($id);
-        
-        // Récupérer les posts du topic
-        $posts = $postManager->findPostsByTopic($id);
-        
-        return [
-            "view" => VIEW_DIR."forum/listPosts.php",  // Vue pour afficher les posts
-            "meta_description" => "Liste des posts du topic : ".$topic->getTopicName(),
-            "data" => [
-                "topic" => $topic,
-                "posts" => $posts
-            ]
-        ];
+public function listPostsByTopic($id) {
+    $postManager = new PostManager();
+    $topicManager = new TopicManager();
+    
+    // Récupérer le topic pour afficher son titre ou autres infos
+    $topic = $topicManager->findOneById($id);
+    
+    if (!$topic) {
+        Session::addFlash('error', 'Le topic spécifié n\'existe pas.');
+        return $this->redirectTo('forum', 'listCategories');
     }
     
+    // Récupérer les posts du topic
+    $posts = $postManager->findPostsByTopic($id) ?? [];
+    
+    return [
+        "view" => VIEW_DIR."forum/listPosts.php",  // Vue pour afficher les posts
+        "meta_description" => "Liste des posts du topic : ".$topic->getTopicName(),  
+        "data" => [
+            "topic" => $topic,
+            "posts" => $posts
+        ]
+    ];
+}
 
     public function listMembres() {
         $userManager = new MembreManager();
@@ -88,40 +91,43 @@ class ForumController extends AbstractController implements ControllerInterface{
 
 
     
-
-    // créer un nouveau topic
+    // CREER UN NOUVEAU TOPIC avec SON PREMIER POST
     public function createTopic() {
- // Vérifier que les données du formulaire sont présentes
- if (!empty($_POST['topicName']) && !empty($_POST['category_id'])) {
-    // Filtrage et validation des données
-    $topicName = filter_input(INPUT_POST, 'topicName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
-
-    // Vérification que la catégorie existe
-    $categoryManager = new CategoryManager();
-    $category = $categoryManager->findOneById($categoryId);
-
-    if (!$category || !$topicName) {
-        Session::addFlash('error', 'La catégorie spécifiée ou le nom du topic est invalide.');
-        return $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
+        if (!empty($_POST['topicName']) && !empty($_POST['postContent']) && !empty($_POST['category_id'])) {
+            $topicName = filter_input(INPUT_POST, 'topicName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+            
+            $topicManager = new TopicManager();
+            $postManager = new PostManager();
+    
+            // Créer le topic et récupérer son ID
+            $topicId = $topicManager->add([
+                'topicName' => $topicName,
+                'category_id' => $categoryId,
+                'membre_id' => 1 // Remplace avec l'ID du membre connecté
+            ]);
+    
+            if ($topicId) {
+                // Insérer le post initial lié au topic créé
+                $postManager->add([
+                    'postContent' => $postContent,
+                    'topic_id' => $topicId,
+                    'membre_id' => 1,  // Remplace avec l'ID du membre connecté
+                    'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
+                ]);
+    
+                $this->redirectTo("forum", "listPostsByTopic", $topicId);
+            } else {
+                Session::addFlash('error', 'Erreur lors de la création du topic.');
+                $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
+            }
+        } else {
+            Session::addFlash('error', 'Tous les champs sont requis.');
+            $this->redirectTo("forum", "listCategories");
+        }
     }
-
-    // Créer une instance du TopicManager pour ajouter le topic
-    $topicManager = new TopicManager();
-    $topicManager->add([
-        'topicName' => $topicName,
-        'category_id' => $categoryId,
-        'membre_id' => 1  // L'ID du membre est fixe pour le moment, pourrait être dynamique plus tard
-    ]);
-
-    // Rediriger vers la liste des topics de la catégorie
-    $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
-} else {
-    // Si les données sont manquantes, afficher un message d'erreur
-    Session::addFlash('error', 'Le nom du topic est requis.');
-    return $this->redirectTo("forum", "listCategories");
-}
-}
+    
 
 
     // créer un nouveau post

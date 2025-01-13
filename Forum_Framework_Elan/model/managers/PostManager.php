@@ -31,7 +31,7 @@ class PostManager extends Manager{
 
         
         // Retourner les résultats en utilisant la méthode getMultipleResults
-        return $this->getMultipleResults($results, $this->className);
+        return $this->getMultipleResults($results, $this->className) ?? [];
     }
 
     

@@ -34,6 +34,18 @@
   font-weight: 550;
 }
 
+.paraLine{
+  font-family: "karla", serif;
+}
+
+.title {
+  font-family: "karla", serif;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2em;
+  color:#2a4135;
+}
+
 h1 {
   color: #618c76;
   font-family: "Kulim Park", serif;
@@ -48,16 +60,26 @@ h2 {
 
 #login {
   margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
+
 .homeButton {
+  width: 120px;
   text-decoration: none;
   background-color: white;
   color: black;
   font-size: smaller;
   font-weight: 500;
   border: solid 1px;
-  padding: 2px 5px 3px 5px;
+  padding: 5px 8px 5px 8px;
+  font-family: "karla", serif;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .homeButton:hover {
@@ -70,14 +92,6 @@ h2 {
   margin: 60px;
 }
 
-#forum a {
-  text-decoration: none;
-  font-family: "karla", serif;
-  color: black;
-  background-color: white;
-  border: solid 1px;
-  padding: 10px 20px;
-}
 
 #ListCat {
   margin-bottom: 40px;
@@ -88,19 +102,60 @@ h2 {
   width: 200px;
   margin-top: 50px;
   margin-right: 20px;
+  text-decoration: none;
+  font-family: "Karla", serif;
+  color: black;
+  background-color: white;
+  border: solid 1px;
+  padding: 10px 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+
 
 .forumCat {
   display: flex;
+  flex-direction: column;
+}
+
+.forumCat h1 {
+  margin-bottom: 20px;
 }
 
 #listTopic {
     display: flex;
+    flex-direction: column;
   }
+
+
+/*********FORMULAIRES*********/
 
 .forumForm {
   font-family: "karla", serif;
+  margin-top: 30px;
 }
+
+.sendButton {
+  width: 80px;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-size: smaller;
+  font-weight: 500;
+  border: solid 1px;
+  padding: 2px 4px 2px 4px;
+  font-family: "karla", serif;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 4px;
+}
+
+.sendButton:hover {
+  background-color: #cce4c7;
+  cursor: pointer;
+}
+
 
 /********* FOOTER *********/
 

@@ -3,13 +3,15 @@ namespace Controller;
 
 use App\AbstractController;
 use App\ControllerInterface;
-use model\managers\MembreManager;
+use Model\Managers\MembreManager;
 use App\Session;
 
-class SecurityController extends AbstractController{
+class SecurityController extends AbstractController {
 
-    // contiendra les méthodes liées à l'authentification : register, login et logout
 
+    
+
+    // METHODE POUR L'INSCRIPTION
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -26,6 +28,20 @@ class SecurityController extends AbstractController{
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $membreManager = new MembreManager();
             
+            // Vérification que le pseudo et l'email ne sont pas déjà utilisés
+            if ($membreManager->findByPseudo($pseudo)) {
+                Session::addFlash('error', 'Ce pseudo est déjà pris.');
+                $this->redirectTo('security', 'register');
+                return;
+            }
+    
+            if ($membreManager->findByEmail($email)) {
+                Session::addFlash('error', 'Cet email est déjà utilisé.');
+                $this->redirectTo('security', 'register');
+                return;
+            }
+
+            // Ajouter l'utilisateur
             $membreManager->add([
                 'pseudo' => $pseudo,
                 'email' => $email,
@@ -36,37 +52,48 @@ class SecurityController extends AbstractController{
             $this->redirectTo('security', 'login');
         } else {
             return [
-                "view" => VIEW_DIR."security/register.php",
+                "view" => VIEW_DIR . "security/register.php",
                 "meta_description" => "Inscription sur le forum"
             ];
         }
     }
     
 
+
+    // METHODE POUR LA CONNEXION
     public function login() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-        $membreManager = new MembreManager();
-
-        if ($membre && password_verify($password, $membre->getPassword())) {
-            Session::set('user', $membre);
-            Session::addFlash('success', 'Connexion réussie !');
-            $this->redirectTo('forum', 'index');
-        } else {
-            Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect.');
-            $this->redirectTo('security', 'login');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    
+            if ($pseudo && $password) {
+                $membreManager = new \Model\Managers\MembreManager();
+                $membre = $membreManager->findByPseudo($pseudo);
+    
+                if ($membre && password_verify($password, $membre->getPassword())) {
+                    Session::setUser($membre);
+                    header('Location: index.php?ctrl=forum&action=home');
+                    exit();
+                } else {
+                    Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect');
+                }
+            } else {
+                Session::addFlash('error', 'Veuillez remplir tous les champs.');
+            }
         }
-    } else {
+    
         return [
-            "view" => VIEW_DIR."security/login.php",
-            "meta_description" => "Connexion au forum"
+            'view' => VIEW_DIR . 'security/login.php',
+            'meta_description' => 'Connexion à votre compte'
         ];
     }
-}
 
 
-    public function logout () {}
+    // METHODE POUR LA DECONNEXION
+    public function logout() {
 
+        Session::setUser(null);
+        Session::addFlash('success', 'Vous avez été déconnecté avec succès.');
+        $this->redirectTo('security', 'login');
+    }
 }

@@ -121,8 +121,16 @@ final class User extends Entity{
         $this->role = $role;
         return $this;
     }
+    
+        // La méthode isAdmin de la Session.php utilise hasRole
+    public function hasRole($role) {
+        return $this->role === $role;
+    }   
+    
 
     public function __toString() {
         return $this->pseudo;
     }
+
 }
+

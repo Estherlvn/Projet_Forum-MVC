@@ -39,10 +39,10 @@ class MembreManager extends Manager {
     // Trouver un membre par pseudo
     public function findByPseudo($pseudo) {
         $sql = "SELECT * FROM " . $this->tableName . " WHERE pseudo = :pseudo";
-        $row = DAO::select($sql, ['pseudo' => $pseudo], false);
+        $row = DAO::select($sql, ['pseudo' => $pseudo], false); // Voir méthode pour requêtes de type SELECT dans DAO
     
         // Debug: Voir ce que contient la variable $row
-        var_dump($row); // Vérifiez si les données retournées sont bien un tableau associatif
+        // var_dump($row); // Vérifiez si les données retournées sont bien un tableau associatif
     
         return $this->getOneOrNullResult($row, $this->className);
     }

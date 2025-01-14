@@ -70,12 +70,12 @@ class SecurityController extends AbstractController {
                 $membre = $membreManager->findByPseudo($pseudo);
     
                 if ($membre) {
-                    var_dump($membre); // Vérifiez si l'objet est bien récupéré
-                    // Vérifiez d'abord si le mot de passe est bien récupéré depuis la base de données
-                    var_dump($membre->getPassword());  // Vérifiez si le mot de passe est correctement récupéré
+                    // var_dump($membre); // Vérifiez si l'objet est bien récupéré
+                    // // Vérifiez d'abord si le mot de passe est bien récupéré depuis la base de données
+                    // var_dump($membre->getPassword());  // Vérifiez si le mot de passe est correctement récupéré
                     if ($membre->getPassword() && password_verify($password, $membre->getPassword())) {
-                        var_dump($membre->getPassword());
-                        var_dump(password_verify($password, $membre->getPassword()));
+                        // var_dump($membre->getPassword());
+                        // var_dump(password_verify($password, $membre->getPassword()));
                         Session::setUser($membre);
                         header('Location: index.php?ctrl=forum&action=home');
                         exit();
@@ -97,12 +97,14 @@ class SecurityController extends AbstractController {
         ];
     }    
 
-}
-//     // METHODE POUR LA DECONNEXION
-//     public function logout() {
 
-//         Session::setUser(null);
-//         Session::addFlash('success', 'Vous avez été déconnecté avec succès.');
-//         $this->redirectTo('security', 'login');
-//     }
-// }
+    // METHODE POUR LA DECONNEXION
+    public function logout() {
+
+        Session::setUser(null);
+        Session::addFlash('success', 'Vous avez été déconnecté avec succès.');
+        $this->redirectTo('security', 'login');
+    }
+
+}
+

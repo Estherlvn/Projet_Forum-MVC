@@ -7,8 +7,6 @@ use Model\Managers\MembreManager;
 use App\Session;
 
 class SecurityController extends AbstractController {
-
-
     
 
     // METHODE POUR L'INSCRIPTION
@@ -41,12 +39,13 @@ class SecurityController extends AbstractController {
                 return;
             }
 
-            // Ajouter l'utilisateur
-            $membreManager->add([
-                'pseudo' => $pseudo,
-                'email' => $email,
-                'password' => $hashedPassword
-            ]);
+            // Ajouter l'utilisateur avec le rôle par défaut "user"
+        $membreManager->add([
+            'pseudo' => $pseudo,
+            'email' => $email,
+            'password' => $hashedPassword,
+            'role' => 'user'  // Attribuer le rôle "user" par défaut
+        ]);
     
             Session::addFlash('success', 'Inscription réussie !');
             $this->redirectTo('security', 'login');
@@ -67,13 +66,22 @@ class SecurityController extends AbstractController {
             $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
             if ($pseudo && $password) {
-                $membreManager = new \Model\Managers\MembreManager();
+                $membreManager = new MembreManager();
                 $membre = $membreManager->findByPseudo($pseudo);
     
-                if ($membre && password_verify($password, $membre->getPassword())) {
-                    Session::setUser($membre);
-                    header('Location: index.php?ctrl=forum&action=home');
-                    exit();
+                if ($membre) {
+                    var_dump($membre); // Vérifiez si l'objet est bien récupéré
+                    // Vérifiez d'abord si le mot de passe est bien récupéré depuis la base de données
+                    var_dump($membre->getPassword());  // Vérifiez si le mot de passe est correctement récupéré
+                    if ($membre->getPassword() && password_verify($password, $membre->getPassword())) {
+                        var_dump($membre->getPassword());
+                        var_dump(password_verify($password, $membre->getPassword()));
+                        Session::setUser($membre);
+                        header('Location: index.php?ctrl=forum&action=home');
+                        exit();
+                    } else {
+                        Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect');
+                    }
                 } else {
                     Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect');
                 }
@@ -82,18 +90,19 @@ class SecurityController extends AbstractController {
             }
         }
     
+        // Assurez-vous que vous retournez la bonne structure de données
         return [
-            'view' => VIEW_DIR . 'security/login.php',
-            'meta_description' => 'Connexion à votre compte'
+            "view" => VIEW_DIR . "security/login.php",
+            "meta_description" => "Connexion à votre compte"  // Assurez-vous que cette clé est présente
         ];
-    }
+    }    
 
-
-    // METHODE POUR LA DECONNEXION
-    public function logout() {
-
-        Session::setUser(null);
-        Session::addFlash('success', 'Vous avez été déconnecté avec succès.');
-        $this->redirectTo('security', 'login');
-    }
 }
+//     // METHODE POUR LA DECONNEXION
+//     public function logout() {
+
+//         Session::setUser(null);
+//         Session::addFlash('success', 'Vous avez été déconnecté avec succès.');
+//         $this->redirectTo('security', 'login');
+//     }
+// }

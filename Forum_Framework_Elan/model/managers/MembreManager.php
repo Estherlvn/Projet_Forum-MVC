@@ -13,6 +13,18 @@ class MembreManager extends Manager {
         parent::connect();
     }
 
+
+    // Ajouter un membre dans la base de données
+    public function add($data) {
+    $sql = "INSERT INTO " . $this->tableName . " (pseudo, email, password, role) VALUES (:pseudo, :email, :password, :role)";
+    DAO::select($sql, [
+        'pseudo' => $data['pseudo'],
+        'email' => $data['email'],
+        'password' => $data['password'],
+        'role' => $data['role'] 
+    ]);
+}
+  
     // Récupérer tous les membres
     public function findAll($order = null) {
         $orderQuery = ($order) ? "ORDER BY ".$order[0]." ".$order[1] : "";
@@ -26,12 +38,15 @@ class MembreManager extends Manager {
 
     // Trouver un membre par pseudo
     public function findByPseudo($pseudo) {
-        $sql = "SELECT * FROM ".$this->tableName." WHERE pseudo = :pseudo";
-        return $this->getOneOrNullResult(
-            DAO::select($sql, ['pseudo' => $pseudo]),
-            $this->className
-        );
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE pseudo = :pseudo";
+        $row = DAO::select($sql, ['pseudo' => $pseudo], false);
+    
+        // Debug: Voir ce que contient la variable $row
+        var_dump($row); // Vérifiez si les données retournées sont bien un tableau associatif
+    
+        return $this->getOneOrNullResult($row, $this->className);
     }
+    
 
     // Trouver un membre par email
     public function findByEmail($email) {
@@ -41,4 +56,27 @@ class MembreManager extends Manager {
             $this->className
         );
     }
+
+    // Trouver un membre par ID
+public function findById($id) {
+    $sql = "SELECT * FROM " . $this->tableName . " WHERE id = :id";
+    return $this->getOneOrNullResult(
+        DAO::select($sql, ['id' => $id]),
+        $this->className
+    );
+}
+
+// Mettre à jour un membre dans la base de données
+public function update($data) {
+    $sql = "UPDATE " . $this->tableName . " SET pseudo = :pseudo, email = :email, password = :password, role = :role WHERE id = :id";
+    DAO::select($sql, [
+        'id' => $data['id'],
+        'pseudo' => $data['pseudo'],
+        'email' => $data['email'],
+        'password' => $data['password'],
+        'role' => $data['role']
+    ]);
+}
+
+
 }

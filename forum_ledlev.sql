@@ -15,71 +15,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Listage de la structure de la base pour forum
+-- Listage de la structure de la base pour forum_ledlev
 CREATE DATABASE IF NOT EXISTS `forum_ledlev` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `forum_ledlev`;
 
-
-
--- Listage de la structure de table forum. category
+-- Listage de la structure de table forum_ledlev. category
 CREATE TABLE IF NOT EXISTS `category` (
   `id_category` int NOT NULL AUTO_INCREMENT,
   `categoryName` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
--- Listage des données de la table forum.category : ~2 rows (environ)
+-- Listage des données de la table forum_ledlev.category : ~3 rows (environ)
 INSERT INTO `category` (`id_category`, `categoryName`) VALUES
-	(1, 'jardinage'),
-	(2, 'automobile');
+	(1, 'Jardinage'),
+	(2, 'Automobile'),
+	(3, 'Bricolage');
 
-
-
--- Listage de la structure de table forum. membre
+-- Listage de la structure de table forum_ledlev. membre
 CREATE TABLE IF NOT EXISTS `membre` (
   `id_membre` int NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL DEFAULT '0',
   `pseudo` varchar(50) NOT NULL DEFAULT '0',
-  `mdp` varchar(255) NOT NULL DEFAULT '0',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `registrationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `role` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_membre`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_membre`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.membre : ~2 rows (environ)
-INSERT INTO `membre` (`id_membre`, `email`, `pseudo`, `mdp`, `registrationDate`, `role`) VALUES
-	(1, 'casper@example.com', 'casper', '0', '2024-12-23 15:00:06', 'admin'),
-	(2, 'jasmine@example.com', 'jasmine', '0', '2024-12-23 15:00:17', 'moderateur');
+-- Listage des données de la table forum_ledlev.membre : ~3 rows (environ)
+INSERT INTO `membre` (`id_membre`, `email`, `pseudo`, `password`, `registrationDate`, `role`) VALUES
+	(1, 'casper@example.com', 'Casper', '1234', '2024-12-23 15:00:06', 'user'),
+	(2, 'jasmine@example.com', 'Jasmine', '5678', '2024-12-23 15:00:17', 'user'),
+	(5, 'estherlvn@gmail.com', 'Esther', '$2y$10$tCeIKZR79ZAIoFi4sE2TxeOCQVdoGnZi3DufB6K4kdEyud.sxCbb2', '2025-01-14 11:46:13', 'user');
 
-
-
-
--- Listage de la structure de table forum. topic
-CREATE TABLE IF NOT EXISTS `topic` (
-  `id_topic` int NOT NULL AUTO_INCREMENT,
-  `topicName` varchar(50) NOT NULL DEFAULT '0',
-  `topicDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `topicStatus` tinyint NOT NULL DEFAULT '0',
-  `membre_id` int NOT NULL,
-  `category_id` int NOT NULL,
-  PRIMARY KEY (`id_topic`),
-  KEY `id_membre` (`membre_id`),
-  KEY `category_id` (`category_id`),
-  CONSTRAINT `FK_topic_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`),
-  CONSTRAINT `FK_topic_membre` FOREIGN KEY (`membre_id`) REFERENCES `membre` (`id_membre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Listage des données de la table forum.topic : ~4 rows (environ)
-INSERT INTO `topic` (`id_topic`, `topicName`, `topicDate`, `topicStatus`, `membre_id`, `category_id`) VALUES
-	(1, 'vidange', '2024-12-23 15:06:00', 0, 1, 2),
-	(2, 'taille rosiers', '2024-12-23 15:08:15', 0, 1, 1),
-	(3, 'clignotant défectueux', '2024-12-23 15:08:57', 0, 2, 2),
-	(4, 'semis tomates', '2024-12-23 15:09:23', 0, 2, 1);
-
-
-
--- Listage de la structure de table forum. post
+-- Listage de la structure de table forum_ledlev. post
 CREATE TABLE IF NOT EXISTS `post` (
   `id_post` int NOT NULL AUTO_INCREMENT,
   `postContent` text NOT NULL,
@@ -88,12 +58,12 @@ CREATE TABLE IF NOT EXISTS `post` (
   `membre_id` int NOT NULL,
   PRIMARY KEY (`id_post`),
   KEY `topic_id` (`topic_id`),
-  KEY `membre_id` (`membre_id`),
+  KEY `membre_id` (`membre_id`) USING BTREE,
   CONSTRAINT `FK_post_membre` FOREIGN KEY (`membre_id`) REFERENCES `membre` (`id_membre`),
   CONSTRAINT `FK_post_topic` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id_topic`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.post : ~12 rows (environ)
+-- Listage des données de la table forum_ledlev.post : ~12 rows (environ)
 INSERT INTO `post` (`id_post`, `postContent`, `postDate`, `topic_id`, `membre_id`) VALUES
 	(1, 'Quand doit être réalisée la vidange pour Citroen C1 ?', '2024-12-23 14:53:52', 1, 1),
 	(2, 'Quelle période pour tailler ses rosiers?', '2024-12-23 15:04:51', 2, 1),
@@ -106,9 +76,32 @@ INSERT INTO `post` (`id_post`, `postContent`, `postDate`, `topic_id`, `membre_id
 	(9, 'Si les lumières du clignotant ne s\'allument pas du tout, cela peut indiquer un problème avec le système électrique, l\'ampoule ou le relais.', '2024-12-23 15:27:12', 3, 1),
 	(10, 'Merci pour ta réponse Casper !', '2024-12-23 15:29:52', 3, 2),
 	(11, 'Un sol trop pauvre. Des pieds à la tige fine, au feuillage peu fourni ou jaune, qui se développent peu, peuvent indiquer un problème de nutrition, une carence en nutriments. La tomate est une plante gourmande, qui a besoin d\'un sol riche pour bien se développer et donner de beaux fruits.', '2024-12-23 15:31:02', 4, 1),
-	(12, 'Merci pour ta réponse Casper !', '2024-12-23 15:31:36', 4, 2);
+	(12, 'Merci pour ta réponse Casper !', '2024-12-23 15:31:36', 4, 2),
+	(24, 'test topic publi&eacute; par Esther, avec son post', '2025-01-14 15:06:23', 22, 5),
+	(25, 'R&eacute;pondre &agrave; un post en tant que membre connect&eacute;', '2025-01-14 15:07:03', 2, 5);
 
+-- Listage de la structure de table forum_ledlev. topic
+CREATE TABLE IF NOT EXISTS `topic` (
+  `id_topic` int NOT NULL AUTO_INCREMENT,
+  `topicName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `topicDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `topicStatus` tinyint NOT NULL DEFAULT '0',
+  `membre_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  PRIMARY KEY (`id_topic`),
+  KEY `category_id` (`category_id`),
+  KEY `id_membre` (`membre_id`) USING BTREE,
+  CONSTRAINT `FK_topic_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`),
+  CONSTRAINT `FK_topic_membre` FOREIGN KEY (`membre_id`) REFERENCES `membre` (`id_membre`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Listage des données de la table forum_ledlev.topic : ~5 rows (environ)
+INSERT INTO `topic` (`id_topic`, `topicName`, `topicDate`, `topicStatus`, `membre_id`, `category_id`) VALUES
+	(1, 'vidange', '2024-12-23 15:06:00', 0, 1, 2),
+	(2, 'taille rosiers', '2024-12-23 15:08:15', 0, 1, 1),
+	(3, 'clignotant défectueux', '2024-12-23 15:08:57', 0, 2, 2),
+	(4, 'semis tomates', '2024-12-23 15:09:23', 0, 2, 1),
+	(22, 'test topic publi&eacute; par Esther', '2025-01-14 16:06:23', 0, 5, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -10,9 +10,26 @@ class TopicManager extends Manager{
     protected $className = "Model\Entities\Topic";
     protected $tableName = "topic";
 
+
     public function __construct(){
         parent::connect();
     }
+
+
+    
+    // récupérer tous les topics (de toutes les catégories)
+    public function findAllTopics() {
+        $sql = "SELECT t.*, c.categoryName, m.pseudo
+                FROM topic t
+                JOIN category c ON t.category_id = c.id_category
+                JOIN membre m ON t.membre_id = m.id_membre
+                ORDER BY t.topicDate DESC"; 
+        
+        return DAO::select($sql, null, true);  // Récupère plusieurs enregistrements
+    }
+    
+    
+
 
     // récupérer tous les topics d'une catégorie spécifique (par son id)
     public function findTopicsByCategory($id) {
@@ -30,6 +47,8 @@ class TopicManager extends Manager{
         // Retourner les résultats en utilisant la méthode getMultipleResults
         return $this->getMultipleResults($results, $this->className);
     }
+
+
 
     // Ajouter un topic
     public function add($data) {

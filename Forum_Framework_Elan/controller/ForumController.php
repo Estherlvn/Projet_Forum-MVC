@@ -98,35 +98,43 @@ class ForumController extends AbstractController implements ControllerInterface{
             $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
             
+            // Récupérer l'utilisateur connecté
+        $membre = Session::getUser();
+
+        if ($membre && $categoryId && $topicName && $postContent) {
             $topicManager = new TopicManager();
             $postManager = new PostManager();
-    
+
             // Créer le topic et récupérer son ID
             $topicId = $topicManager->add([
                 'topicName' => $topicName,
                 'category_id' => $categoryId,
-                'membre_id' => 1 // Remplace avec l'ID du membre connecté
+                'membre_id' => $membre->getId()  // Utilisation de l'ID du membre connecté
             ]);
-    
+
             if ($topicId) {
                 // Insérer le post initial lié au topic créé
                 $postManager->add([
                     'postContent' => $postContent,
                     'topic_id' => $topicId,
-                    'membre_id' => 1,  // Remplace avec l'ID du membre connecté
+                    'membre_id' => $membre->getId(),  // Utilisation de l'ID du membre connecté
                     'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
                 ]);
-    
+
                 $this->redirectTo("forum", "listPostsByTopic", $topicId);
             } else {
                 Session::addFlash('error', 'Erreur lors de la création du topic.');
                 $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
             }
         } else {
-            Session::addFlash('error', 'Tous les champs sont requis.');
+            Session::addFlash('error', 'Données invalides.');
             $this->redirectTo("forum", "listCategories");
         }
+    } else {
+        Session::addFlash('error', 'Tous les champs sont requis.');
+        $this->redirectTo("forum", "listCategories");
     }
+}
     
     // CREER UN NOUVEAU POST dans un Topic
     public function createPost() {
@@ -134,15 +142,15 @@ class ForumController extends AbstractController implements ControllerInterface{
             $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $topicId = filter_input(INPUT_POST, 'topic_id', FILTER_VALIDATE_INT);
             
-            // Récupérer l'ID du membre connecté (ajuster avec la session)
-            $membreId = 1;  // Utiliser un ID dynamique si nécessaire
+            // Récupérer l'ID du membre connecté (ajusté avec la session)
+            $membre = Session::getUser();
     
-            if ($topicId && $postContent) {
+            if ($membre && $topicId && $postContent) {
                 $postManager = new PostManager();
                 $postManager->add([
                     'postContent' => $postContent,
                     'topic_id' => $topicId,
-                    'membre_id' => $membreId,
+                    'membre_id' => $membre->getId(),  // Utiliser getId() pour récupérer l'ID
                     'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
                 ]);
     

@@ -16,6 +16,6 @@ $user = $result ["data"]["user"];
         </section>
 
         <section class="profile-actions">
-            <!-- <a href="index.php?ctrl=security&action=editProfile">Modifier le profil</a> -->
+            <a href="index.php?ctrl=security&action=dashboard">Tableau de bord</a>
             <a href="index.php?ctrl=security&action=logout">Se déconnecter</a>
         </section>

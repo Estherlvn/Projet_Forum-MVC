@@ -136,5 +136,4 @@ class SecurityController extends AbstractController {
             "meta_description" => "Profil de l'utilisateur"
         ];
     }
-
 }

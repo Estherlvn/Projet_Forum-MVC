@@ -11,7 +11,7 @@ class HomeController extends AbstractController implements ControllerInterface {
     public function index() {
         $topicManager = new TopicManager();
         $topics = $topicManager->findAllTopics();
-        
+
         return [
             "view" => VIEW_DIR . "home.php",
             "data" => [

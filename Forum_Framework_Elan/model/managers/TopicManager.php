@@ -24,8 +24,8 @@ class TopicManager extends Manager{
                 JOIN category c ON t.category_id = c.id_category
                 JOIN membre m ON t.membre_id = m.id_membre
                 ORDER BY t.topicDate DESC"; 
-        
-        return DAO::select($sql, null, true);  // Récupère plusieurs enregistrements
+
+        return $this->getMultipleResults(DAO::select($sql), $this->className);
     }
     
     

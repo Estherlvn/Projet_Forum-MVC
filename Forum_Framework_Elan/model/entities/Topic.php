@@ -59,6 +59,11 @@ final class Topic extends Entity {
         return $this->topicDate;
     }
 
+    public function getTopicDateFormat() {
+        $date = new \DateTime($this->topicDate);
+        return $date->format('d-m-Y H:i');
+    }
+
     /**
      * Set the value of topicDate
      *

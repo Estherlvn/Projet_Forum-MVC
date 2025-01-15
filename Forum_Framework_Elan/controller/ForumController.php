@@ -90,9 +90,23 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
+
+    protected function restrictToUser() {
+        if (!Session::getUser()) {
+            // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
+            Session::addFlash('error', 'Vous devez être connecté pour accéder à cette page.');
+            $this->redirectTo('security', 'login');
+        }
+    }
+    
+
     
     // CREER UN NOUVEAU TOPIC avec SON PREMIER POST
     public function createTopic() {
+        
+        // Vérifier si l'utilisateur est connecté pour créer un topic
+        $this->restrictToUser();
+
         if (!empty($_POST['topicName']) && !empty($_POST['postContent']) && !empty($_POST['category_id'])) {
             $topicName = filter_input(INPUT_POST, 'topicName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -138,6 +152,10 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     // CREER UN NOUVEAU POST dans un Topic
     public function createPost() {
+
+         // Vérifier si l'utilisateur est connecté pour créer un post
+         $this->restrictToUser();
+
         if (!empty($_POST['postContent']) && !empty($_POST['topic_id'])) {
             $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $topicId = filter_input(INPUT_POST, 'topic_id', FILTER_VALIDATE_INT);

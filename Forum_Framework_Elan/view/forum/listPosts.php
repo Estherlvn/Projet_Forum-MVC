@@ -9,10 +9,9 @@
 <?php if (!empty($posts)): ?>
     <?php foreach ($posts as $post): ?>
         <?php
-            $postDate = new DateTime($post->getPostDate());
             echo "<p class='paraLine'><a class='title' href=\"#\">" . $post->getPostContent() . "</a> publié par " . 
             $post->getMembre()->getPseudo() . " le " . 
-            $postDate->format('d/m/Y - H:i') . "</p>";
+            $topic->getTopicDateFormat() . "</p>";
         ?>
     <?php endforeach; ?>
 <?php else: ?>

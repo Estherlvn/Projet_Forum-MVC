@@ -37,14 +37,16 @@
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
                                 ?>
-                                <a href="index.php?ctrl=forum&action=index">Catégories</a>
+                                <a href="index.php?ctrl=forum&action=topics">Topics</a>
+                                <a href="index.php?ctrl=forum&action=categories">Catégories</a>
                                 <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
                                 <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="index.php?ctrl=forum&action=index">Catégories</a>
+                                <a href="index.php?ctrl=forum&action=topics">Topics</a>
+                                <a href="index.php?ctrl=forum&action=categories">Catégories</a>
                                 <a href="index.php?ctrl=security&action=login">Connexion</a>
                                 <a href="index.php?ctrl=security&action=register">Inscription</a>
                             <?php

@@ -11,6 +11,7 @@
 <?php
 foreach($topics as $topic) {
 
+    $topicDate = new DateTime($topic->getTopicDate());
     echo "<div class='topicLine'>
             <a class='title' href=\"index.php?ctrl=forum&action=listPostsByTopic&id=" . $topic->getId() . "\">
                 " . htmlspecialchars($topic->getTopicName()) . "
@@ -18,7 +19,7 @@ foreach($topics as $topic) {
          
           <p class='details'>créé par " . 
           htmlspecialchars($topic->getMembre()->getPseudo()) . 
-          " le " . $topic->getTopicDateFormat() . "</p>" . "</div>" ;
+          " le " . $topicDate->format('d/m/Y - H:i') . "</p>" . "</div>" ;
 }
 ?>
 </div>

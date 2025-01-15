@@ -11,7 +11,7 @@ use Model\Managers\PostManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
-    public function index() {
+    public function categories() {
         
         // créer une nouvelle instance de CategoryManager
         $categoryManager = new CategoryManager();
@@ -27,6 +27,28 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+
+    public function topics() {
+        
+        $topicManager = new TopicManager();
+        $topics = $topicManager->findAll(["topicName", "DESC"]);
+
+        return [
+            "view" => VIEW_DIR."forum/listTopics.php",
+            "meta_description" => "Liste des topics du forum",
+            "data" => [
+                "topics" => $topics
+            ]
+        ];
+    }
+
+
+
+    // public function listTopics(){
+    //     $topicManager = new TopicManager();
+    //     $topics = $topicManager->listTopics;
+        
+    // }
 
     public function listTopicsByCategory($id) {
 
@@ -90,6 +112,9 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
+
+
+
     // RESTREINDRE l'accès aux contributions du forum aux membres connectés
     protected function restrictToUser() {
         if (!Session::getUser()) {
@@ -99,7 +124,6 @@ class ForumController extends AbstractController implements ControllerInterface{
         }
     }
     
-
     
     // CREER UN NOUVEAU TOPIC avec SON PREMIER POST
     public function createTopic() {
@@ -135,7 +159,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                     'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
                 ]);
 
-                $this->redirectTo("forum", "listPostsByTopic", $topicId);
+                $this->redirectTo("forum", "sByTopic", $topicId);
             } else {
                 Session::addFlash('error', 'Erreur lors de la création du topic.');
                 $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
@@ -186,5 +210,4 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     
 }
-
 

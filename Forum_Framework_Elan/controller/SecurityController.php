@@ -40,7 +40,7 @@ class SecurityController extends AbstractController {
             }
 
             // Ajouter l'utilisateur avec le rôle par défaut "user"
-        $membreManager->add([
+            $membreManager->add([
             'pseudo' => $pseudo,
             'email' => $email,
             'password' => $hashedPassword,
@@ -69,9 +69,7 @@ class SecurityController extends AbstractController {
                 $membre = $membreManager->findByPseudo($pseudo);
     
                 if ($membre) {
-                    // var_dump($membre); // Vérifiez si l'objet est bien récupéré
-                    // // Vérifiez d'abord si le mot de passe est bien récupéré depuis la base de données
-                    // var_dump($membre->getPassword());  // Vérifiez si le mot de passe est correctement récupéré
+
                     if ($membre->getPassword() && password_verify($password, $membre->getPassword())) {
                         // var_dump($membre->getPassword());
                         // var_dump(password_verify($password, $membre->getPassword()));
@@ -89,10 +87,10 @@ class SecurityController extends AbstractController {
             }
         }
     
-            // Assurez-vous que vous retournez la bonne structure de données
+     
             return [
                 "view" => VIEW_DIR . "security/login.php",
-                "meta_description" => "Connexion à votre compte"  // Assurez-vous que cette clé est présente
+                "meta_description" => "Connexion à votre compte"
             ];
         }    
 

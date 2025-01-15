@@ -30,11 +30,14 @@ class MembreManager extends Manager {
         $orderQuery = ($order) ? "ORDER BY ".$order[0]." ".$order[1] : "";
         $sql = "SELECT * FROM ".$this->tableName." ".$orderQuery;
         
+
         return $this->getMultipleResults(
             DAO::select($sql), 
             $this->className
         );
     }
+
+
 
     // Trouver un membre par pseudo
     public function findByPseudo($pseudo) {

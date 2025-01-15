@@ -1,5 +1,5 @@
 <?php
-$users = $result ["data"]["users"];
+$membres = $result ["data"]["membres"];
 ?>
 
 <section class="dashboard">
@@ -18,15 +18,15 @@ $users = $result ["data"]["users"];
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($users as $user): ?>
+                <?php foreach ($membres as $membre): ?>
                     <tr>
-                        <td><?= htmlspecialchars($user->getPseudo()) ?></td>
-                        <td><?= htmlspecialchars($user->getEmail()) ?></td>
-                        <td><?= htmlspecialchars($user->getRegistrationDateformat()->format) ?></td>
-                        <td><?= htmlspecialchars($user->getRole()) ?></td>
+                        <td><?= htmlspecialchars($membre->getPseudo()) ?></td>
+                        <td><?= htmlspecialchars($membre->getEmail()) ?></td>
+                        <td><?= htmlspecialchars($membre->getRegistrationDateformat()) ?></td>
+                        <td><?= htmlspecialchars($membre->getRole()) ?></td>
                         <td>
                             <!-- Ajouter des actions comme modifier ou supprimer un membre -->
-                            <a href="index.php?ctrl=admin&action=deleteUser&id=<?= $user->getId() ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?')">Supprimer</a>
+                            <a href="index.php?ctrl=admin&action=deleteUser&id=<?= $membre->getId() ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?')">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

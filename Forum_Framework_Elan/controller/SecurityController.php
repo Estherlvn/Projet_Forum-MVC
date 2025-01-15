@@ -58,7 +58,6 @@ class SecurityController extends AbstractController {
     }
     
 
-
     // METHODE POUR LA CONNEXION
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -90,12 +89,12 @@ class SecurityController extends AbstractController {
             }
         }
     
-        // Assurez-vous que vous retournez la bonne structure de données
-        return [
-            "view" => VIEW_DIR . "security/login.php",
-            "meta_description" => "Connexion à votre compte"  // Assurez-vous que cette clé est présente
-        ];
-    }    
+            // Assurez-vous que vous retournez la bonne structure de données
+            return [
+                "view" => VIEW_DIR . "security/login.php",
+                "meta_description" => "Connexion à votre compte"  // Assurez-vous que cette clé est présente
+            ];
+        }    
 
 
     // METHODE POUR LA DECONNEXION
@@ -106,5 +105,36 @@ class SecurityController extends AbstractController {
         $this->redirectTo('security', 'login');
     }
 
-}
 
+
+    // VUE PROFILE
+
+    // RESTREINDRE l'accès aux contributions du forum aux membres connectés
+    protected function restrictToUser() {
+        if (!Session::getUser()) {
+            // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
+            Session::addFlash('error', 'Vous devez être connecté pour accéder à cette page.');
+            $this->redirectTo('security', 'login');
+        }
+    }
+
+
+    // Méthode pour afficher le profil du membre connecté
+    public function profile() {
+        // Vérifier si l'utilisateur est connecté
+        $this->restrictToUser();
+    
+        // Récupérer l'utilisateur connecté
+        $user = Session::getUser();
+    
+        // Passer les informations de l'utilisateur à la vue
+        return [
+            "view" => VIEW_DIR . "security/profile.php",
+            "data" => [
+                "user" => $user // Envoyer l'objet utilisateur à la vue
+            ],
+            "meta_description" => "Profil de l'utilisateur"
+        ];
+    }
+
+}

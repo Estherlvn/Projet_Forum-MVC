@@ -90,7 +90,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
-
+    // RESTREINDRE l'accès aux contributions du forum aux membres connectés
     protected function restrictToUser() {
         if (!Session::getUser()) {
             // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté

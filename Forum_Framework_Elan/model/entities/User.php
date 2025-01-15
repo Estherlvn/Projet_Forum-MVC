@@ -105,6 +105,12 @@ final class User extends Entity{
         return $this;
     }
 
+    public function getRegistrationDateFormat() {
+        $date = new \DateTime($this->registrationDate);
+        return $date->format('d-m-Y H:i');
+    }
+
+
     /**
      * Get the value of role
      */ 

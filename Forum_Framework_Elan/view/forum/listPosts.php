@@ -11,7 +11,7 @@
         <?php
             echo "<p class='paraLine'><a class='title' href=\"#\">" . $post->getPostContent() . "</a> publié par " . 
             $post->getMembre()->getPseudo() . " le " . 
-            $topic->getTopicDateFormat() . "</p>";
+            $post->getPostDateFormat() . "</p>";
         ?>
     <?php endforeach; ?>
 <?php else: ?>

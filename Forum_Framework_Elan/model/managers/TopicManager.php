@@ -39,7 +39,8 @@ class TopicManager extends Manager{
                 FROM ".$this->tableName." t
                 INNER JOIN category c ON t.category_id = c.id_category
                 INNER JOIN membre m ON t.membre_id = m.id_membre
-                WHERE t.category_id = :id";
+                WHERE t.category_id = :id
+                ORDER BY t.topicDate DESC";
        
         // Exécution de la requête et récupération des résultats
         $results = DAO::select($sql, ['id' => $id]);

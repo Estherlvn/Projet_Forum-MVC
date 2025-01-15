@@ -15,7 +15,12 @@ $user = $result ["data"]["user"];
 
         </section>
 
+        
         <section class="profile-actions">
-            <a href="index.php?ctrl=admin&action=dashboard">Tableau de bord</a>
-            <a href="index.php?ctrl=security&action=logout">Se déconnecter</a>
+
+            <?php if ($user->getRole() === 'ROLE_ADMIN'): ?>
+        <a href="index.php?ctrl=admin&action=dashboard">Tableau de bord</a>
+            <?php endif; ?>
+        <a href="index.php?ctrl=security&action=logout">Se déconnecter</a>
+
         </section>

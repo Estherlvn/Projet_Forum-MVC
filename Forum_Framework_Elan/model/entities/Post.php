@@ -37,6 +37,11 @@ final class Post extends Entity {
         return $this->postDate;
     }
 
+    public function getPostDateFormat() {
+        $date = new \DateTime($this->postDate);
+        return $date->format('d-m-Y H:i');
+    }
+
     public function setPostDate($postDate) {
         $this->postDate = $postDate;
         return $this;

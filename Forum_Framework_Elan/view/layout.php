@@ -29,7 +29,7 @@
                             <?php
                             if(App\Session::isAdmin()){
                                 ?>
-                                <a href="index.php?ctrl=home&action=users">Voir la liste des membres</a>
+                                <a href="index.php?ctrl=admin&action=dashboard">Voir la liste des membres</a>
                             <?php } ?>
                      
                         

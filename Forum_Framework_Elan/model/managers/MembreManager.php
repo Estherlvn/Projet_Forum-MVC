@@ -29,14 +29,13 @@ class MembreManager extends Manager {
     public function findAll($order = null) {
         $orderQuery = ($order) ? "ORDER BY ".$order[0]." ".$order[1] : "";
         $sql = "SELECT * FROM ".$this->tableName." ".$orderQuery;
-        
 
         return $this->getMultipleResults(
+
             DAO::select($sql), 
             $this->className
         );
     }
-
 
 
     // Trouver un membre par pseudo
@@ -61,16 +60,16 @@ class MembreManager extends Manager {
     }
 
     // Trouver un membre par ID
-public function findById($id) {
+    public function findById($id) {
     $sql = "SELECT * FROM " . $this->tableName . " WHERE id = :id";
     return $this->getOneOrNullResult(
         DAO::select($sql, ['id' => $id]),
         $this->className
-    );
-}
+        );
+    }
 
-// Mettre à jour un membre dans la base de données
-public function update($data) {
+    // Mettre à jour un membre dans la base de données
+    public function update($data) {
     $sql = "UPDATE " . $this->tableName . " SET pseudo = :pseudo, email = :email, password = :password, role = :role WHERE id = :id";
     DAO::select($sql, [
         'id' => $data['id'],
@@ -78,8 +77,8 @@ public function update($data) {
         'email' => $data['email'],
         'password' => $data['password'],
         'role' => $data['role']
-    ]);
-}
+        ]);
+    }
 
 
 }

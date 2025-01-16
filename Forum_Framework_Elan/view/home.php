@@ -19,43 +19,28 @@
 
 
 
-
-    <section class=homeS1>    
-  
+    <section class="homeS1">    
     <h3>Liste des derniers topics</h3><br>
-    <div class="forumCat">
-    <div id="listing">
-        <?php if (!empty($topics)) { ?>
-            
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom du Topic</th>
-                    <th>Catégorie</th>
-                    <th>Date de Création</th>
-                    <th>Auteur</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($topics as $topic) {
-                ?>
-                    <tr>
-                        <td><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>"><?= htmlspecialchars($topic->getTopicName()) ?></a></td>
-                        <td><?= htmlspecialchars($topic->getCategory()->getCategoryName()) ?></td>
-                        <td><?= htmlspecialchars($topic->getTopicDateFormat()) ?></td>
-                        <td><?= htmlspecialchars($topic->getMembre()->getPseudo()) ?></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    <?php } else { ?>
-        <p>Aucun topic n'a été trouvé.</p>
-    <?php } ?>
 
-        </tbody>
-    </table>
+    <div class="forumCat">
+        <div id="listing">
+
+            <?php foreach ($topics as $topic): ?>
+                <div class="topicLine">
+                    <a class="title" href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>">
+                        <?= htmlspecialchars($topic->getTopicName()) ?>
+                    </a>
+                    <p class="details">
+                        <?= htmlspecialchars($topic->getCategory()->getCategoryName()) ?> |
+                        <?= htmlspecialchars($topic->getTopicDateFormat()) ?> |
+                        <?= htmlspecialchars($topic->getMembre()->getPseudo()) ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
     </div>
-    </div>
-        </section>
+</section>
+
 
 </main>

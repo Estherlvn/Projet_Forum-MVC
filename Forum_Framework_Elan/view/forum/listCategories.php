@@ -1,5 +1,6 @@
 <?php
     $categories = $result["data"]['categories']; 
+
 ?>
 
 <div id="ListCat">

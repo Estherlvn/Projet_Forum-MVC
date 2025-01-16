@@ -28,13 +28,15 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
-    public function topics() {
-        
-        $topicManager = new TopicManager();
-        $topics = $topicManager->findAll(["topicName", "DESC"]);
 
+    public function topics() {
+        $topicManager = new TopicManager();
+        
+        // Récupérer tous les topics avec des détails supplémentaires, y compris la catégorie
+        $topics = $topicManager->findAllWithCategory();
+        
         return [
-            "view" => VIEW_DIR."forum/listTopics.php",
+            "view" => VIEW_DIR."forum/listAllTopics.php",
             "meta_description" => "Liste des topics du forum",
             "data" => [
                 "topics" => $topics
@@ -42,13 +44,6 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
-
-
-    // public function listTopics(){
-    //     $topicManager = new TopicManager();
-    //     $topics = $topicManager->listTopics;
-        
-    // }
 
     public function listTopicsByCategory($id) {
 
@@ -65,7 +60,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             "meta_description" => "Liste des topics par catégorie : ".$category,
             "data" => [
                 "category" => $category,
-                "topics" => $topics // Changez ici le nom de la variable de "topic" à "topics"
+                "topics" => $topics // Changer ici le nom de la variable de "topic" à "topics"
             ]
         ];
     }

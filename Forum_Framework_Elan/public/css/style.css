@@ -57,15 +57,18 @@
   font-family: "karla", serif;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 0.9em;
   color: #2a4135;
 }
 
 .details {
   font-family: "karla", serif;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
+#titleTopic{
+  margin-bottom: 20px;
+}
 
 h1 {
   color: #618c76;
@@ -77,6 +80,12 @@ h2 {
   color: #618c76;
   font-family: "Kulim Park", serif;
   font-weight: 450;
+}
+
+
+h3{
+  color: #618c76;
+  font-weight: 500;
 }
 
 #login {

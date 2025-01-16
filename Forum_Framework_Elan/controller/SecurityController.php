@@ -74,7 +74,7 @@ class SecurityController extends AbstractController {
                         // var_dump($membre->getPassword());
                         // var_dump(password_verify($password, $membre->getPassword()));
                         Session::setUser($membre);
-                        header('Location: index.php?ctrl=forum&action=home');
+                        header('Location: index.php?ctrl=forum&action=topics');
                         exit();
                     } else {
                         Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect');

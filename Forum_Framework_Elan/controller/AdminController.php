@@ -28,4 +28,27 @@ class AdminController extends AbstractController implements ControllerInterface 
             "meta_description" => "Tableau de bord de l'administration"
         ];
     }
+
+    public function deleteUser() {
+        if (!Session::isAdmin()) {
+            Session::addFlash('error', 'Action non autorisée.');
+            header('Location: index.php?ctrl=security&action=login');
+            exit();
+        }
+
+        $membreManager = new MembreManager();
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id && $membreManager->findOneById($id)) {
+            $membreManager->delete($id);
+            Session::addFlash('success', 'Utilisateur supprimé avec succès.');
+        } else {
+            Session::addFlash('error', 'Utilisateur introuvable.');
+        }
+
+        header('Location: index.php?ctrl=admin&action=dashboard');
+        exit();
+    }
 }
+
+

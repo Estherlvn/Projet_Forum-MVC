@@ -55,4 +55,19 @@ class TopicManager extends Manager{
     public function add($data) {
         return parent::add($data);  // Appeler la méthode add du parent (Manager.php)
     }
+
+
+    public function findAllWithCategory() {
+        $sql = "SELECT t.*, c.categoryName, m.pseudo 
+                FROM topic t
+                JOIN category c ON t.category_id = c.id_category
+                JOIN membre m ON t.membre_id = m.id_membre
+                ORDER BY t.topicDate DESC";
+        
+        return $this->getMultipleResults(
+            DAO::select($sql),
+            $this->className
+        );
+    }
+    
 }

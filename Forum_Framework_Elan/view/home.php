@@ -10,6 +10,8 @@
 
         <h1>eQuotidien</h1>
         <h2>Un forum pour tous, qui facilite la vie de chacun</h2>
+        <img id="imgVoiture" src="/Projet_Forum-MVC/Forum_Framework_Elan//public/img/voiture.png" alt="Voiture">
+
      
         <?php if (empty($_SESSION['user'])): ?>
         <div id="login">
@@ -17,8 +19,9 @@
            <a class="homeButton" href="index.php?ctrl=security&action=register">Inscription</a>
         </div>
         <?php endif; ?>
-    </section>
 
+
+    </section>
 
     <section class="sectionCat">
     
@@ -29,6 +32,7 @@
 
         <?php }
          ?>
+
     </section>
 
 
@@ -54,6 +58,8 @@
         </div>
     </div>
 </section>
+
+
 
 
 </main>

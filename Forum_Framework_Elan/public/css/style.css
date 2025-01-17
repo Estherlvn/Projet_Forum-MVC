@@ -170,6 +170,7 @@
 
 .topicLine {
   height: 40px;
+  width: 700px;
   font-family: "karla", serif;
   border: solid gray 0.5px;
   padding: 15px;
@@ -231,12 +232,34 @@ h3 {
 }
 
 /********* FORMULAIRES *********/
+.loginForm {
+  font-family: "karla", serif;
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  margin-top: 20px;
+  border: solid gray 0.5px;
+  padding: 20px;
+  width: 345px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 2px;
+}
+
+.loginForm form {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 
 .forumForm {
   font-family: "karla", serif;
   display: flex;
   flex-direction: column;
-  margin-right: 200px;
   border: solid gray 0.5px;
   padding: 20px;
   width: 345px;
@@ -266,7 +289,7 @@ h3 {
 }
 
 .sendButton {
-  width: 80px;
+  width: 100px;
   text-decoration: none;
   background-color: #ff912c;
   color: black;
@@ -291,6 +314,25 @@ h3 {
 .profileSection {
   width: 40%;
   margin-top: 10px;
+}
+
+.dashboard {
+  margin-top: 25px;
+  font-family: "karla", serif;
+}
+
+.dashboard table th {
+  padding-bottom: 15px;
+  text-align: left;
+}
+
+.dashboard table td {
+  padding-bottom: 10px;
+  padding-right: 25px;
+}
+
+.dashboard a {
+  color: #d74400;
 }
 
 .profileDetails {

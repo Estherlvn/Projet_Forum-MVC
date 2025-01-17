@@ -120,18 +120,20 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
     
     
-    // CREER UN NOUVEAU TOPIC avec SON PREMIER POST
-    public function createTopic() {
-        
-        // Vérifier si l'utilisateur est connecté pour créer un topic
-        $this->restrictToUser();
+    /// CREER UN NOUVEAU TOPIC avec SON PREMIER POST
+public function createTopic() {
+    // Vérifier si l'utilisateur est connecté pour créer un topic
+    $this->restrictToUser();
 
-        if (!empty($_POST['topicName']) && !empty($_POST['postContent']) && !empty($_POST['category_id'])) {
-            $topicName = filter_input(INPUT_POST, 'topicName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
-            
-            // Récupérer l'utilisateur connecté
+    if (!empty($_POST['topicName']) && !empty($_POST['postContent']) && !empty($_POST['category_id'])) {
+        // Utiliser une méthode plus appropriée pour nettoyer les entrées
+        $topicName = filter_input(INPUT_POST, 'topicName', FILTER_SANITIZE_STRING);
+        $topicName = html_entity_decode($topicName);  // Décoder les entités HTML
+        $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_STRING);
+        $postContent = html_entity_decode($postContent);  // Décoder également le contenu du post
+        $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+        
+        // Récupérer l'utilisateur connecté
         $membre = Session::getUser();
 
         if ($membre && $categoryId && $topicName && $postContent) {
@@ -150,11 +152,11 @@ class ForumController extends AbstractController implements ControllerInterface{
                 $postManager->add([
                     'postContent' => $postContent,
                     'topic_id' => $topicId,
-                    'membre_id' => $membre->getId(),  // Utilisation de l'ID du membre connecté
+                    'membre_id' => $membre->getId(),
                     'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
                 ]);
 
-                $this->redirectTo("forum", "sByTopic", $topicId);
+                $this->redirectTo("forum", "listPostsByTopic", $topicId);
             } else {
                 Session::addFlash('error', 'Erreur lors de la création du topic.');
                 $this->redirectTo("forum", "listTopicsByCategory", $categoryId);
@@ -168,40 +170,40 @@ class ForumController extends AbstractController implements ControllerInterface{
         $this->redirectTo("forum", "listCategories");
     }
 }
-    
-    // CREER UN NOUVEAU POST dans un Topic
-    public function createPost() {
 
-         // Vérifier si l'utilisateur est connecté pour créer un post
-         $this->restrictToUser();
+    
+public function createPost() {
+    // Vérifier si l'utilisateur est connecté pour créer un post
+    $this->restrictToUser();
 
-        if (!empty($_POST['postContent']) && !empty($_POST['topic_id'])) {
-            $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $topicId = filter_input(INPUT_POST, 'topic_id', FILTER_VALIDATE_INT);
-            
-            // Récupérer l'ID du membre connecté (ajusté avec la session)
-            $membre = Session::getUser();
+    if (!empty($_POST['postContent']) && !empty($_POST['topic_id'])) {
+        // Utilisation d'une méthode plus sûre pour nettoyer les entrées
+        $postContent = filter_input(INPUT_POST, 'postContent', FILTER_SANITIZE_STRING);
+        $postContent = html_entity_decode($postContent);  // Décoder les entités HTML si déjà encodées
+        $topicId = filter_input(INPUT_POST, 'topic_id', FILTER_VALIDATE_INT);
+        
+        $membre = Session::getUser();  // Récupérer l'utilisateur connecté
     
-            if ($membre && $topicId && $postContent) {
-                $postManager = new PostManager();
-                $postManager->add([
-                    'postContent' => $postContent,
-                    'topic_id' => $topicId,
-                    'membre_id' => $membre->getId(),  // Utiliser getId() pour récupérer l'ID
-                    'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
-                ]);
-    
-                // Redirection vers le topic après la création du post
-                $this->redirectTo('forum', 'listPostsByTopic', $topicId);
-            } else {
-                Session::addFlash('error', 'Données invalides. Impossible de créer le post.');
-                $this->redirectTo('forum', 'listPostsByTopic', $topicId);
-            }
+        if ($membre && $topicId && $postContent) {
+            $postManager = new PostManager();
+            $postManager->add([
+                'postContent' => $postContent,  // Stocker le contenu décodé
+                'topic_id' => $topicId,
+                'membre_id' => $membre->getId(),
+                'postDate' => (new \DateTime())->format('Y-m-d H:i:s')
+            ]);
+
+            $this->redirectTo('forum', 'listPostsByTopic', $topicId);
         } else {
-            Session::addFlash('error', 'Le contenu du post est requis.');
-            $this->redirectTo('forum', 'listPostsByTopic', $_POST['topic_id']);
+            Session::addFlash('error', 'Données invalides. Impossible de créer le post.');
+            $this->redirectTo('forum', 'listPostsByTopic', $topicId);
         }
+    } else {
+        Session::addFlash('error', 'Le contenu du post est requis.');
+        $this->redirectTo('forum', 'listPostsByTopic', $_POST['topic_id']);
     }
+}
+
     
     
 }

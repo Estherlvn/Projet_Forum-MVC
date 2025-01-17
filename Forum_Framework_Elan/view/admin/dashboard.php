@@ -3,17 +3,18 @@ $membres = $result["data"]["membres"];
 $user = $_SESSION["user"]; // pour s'assurer que l'utilisateur connecté est stocké dans la session
 ?>
 
-<section class="dashboard">
+
     <h1>Tableau de bord de l'Admin</h1>
     <h2>Liste des membres</h2>
 
-    <!-- Tableau des membres -->
+
+    <section class="dashboard">
     <table>
         <thead>
             <tr>
                 <th>Pseudo</th>
                 <th>Email</th>
-                <th>Date d'inscription</th>
+                <th>Inscription</th>
                 <th>Rôle</th>
                 <th>Actions</th>
             </tr>
@@ -36,4 +37,5 @@ $user = $_SESSION["user"]; // pour s'assurer que l'utilisateur connecté est sto
             <?php endforeach; ?>
         </tbody>
     </table>
+               
 </section>

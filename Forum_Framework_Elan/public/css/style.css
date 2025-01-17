@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 /******* HOMEPAGE *******/
@@ -34,12 +33,148 @@
   font-weight: 550;
 }
 
+.homeS1 h1 {
+  font-size: 2.5em;
+  margin-bottom: 4px;
+}
+
+.homeS1 h2 {
+  font-size: 1.7em;
+}
+
+.homeS1 h3 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.sectionCat {
+  margin: 60px;
+}
+
+/* .sectionCat h3 {
+  font-size: 1.5em;
+  font-family: "Kulim Park", serif;
+  margin-bottom: 20px;
+} */
+
+.homeCat {
+  width: 500px;
+  margin-top: 50px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: white;
+  border: solid rgb(73, 71, 71) 0.5px;
+  font-family: "Karla", serif;
+  background-image: url("../img/planche.png");
+  border-radius: 2px;
+  padding: 10px 30px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#login {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.homeButton {
+  width: 120px;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-size: smaller;
+  font-weight: 500;
+  border: solid 1px;
+  padding: 5px 8px 5px 8px;
+  font-family: "karla", serif;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.homeButton:hover {
+  background-color: #cce4c7;
+}
+
+/********* FORUM **********/
+
+#forum {
+  margin: 60px 150px;
+}
+
+#ListCat {
+  margin-bottom: 40px;
+}
+
+.categoryItem {
+  width: 200px;
+  margin-top: 50px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-family: "Karla", serif;
+  color: black;
+  background-color: white;
+  border: solid 1px;
+  padding: 10px 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.forumCat {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forumCat h1 {
+  margin-bottom: 30px;
+}
+
+#listing {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#listingPost {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 20px;
+}
+
+#listingPost h2 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.postLine {
+  height: auto;
+  width: 700px;
+  font-family: "karla", serif;
+  border: solid gray 0.5px;
+  padding: 15px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /*space-between entre title et details */
+}
+
 .topicLine {
   height: 40px;
   font-family: "karla", serif;
   border: solid gray 0.5px;
   padding: 15px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 2px;
   margin-bottom: 10px;
   display: flex;
@@ -57,16 +192,24 @@
   font-family: "karla", serif;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9em;
+  font-size: 1em;
   color: #2a4135;
 }
 
 .details {
   font-family: "karla", serif;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
-#titleTopic{
+.detailPost {
+  font-family: "karla", serif;
+  font-size: 0.8em;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#titleTopic {
   margin-bottom: 20px;
 }
 
@@ -82,84 +225,10 @@ h2 {
   font-weight: 450;
 }
 
-
-h3{
+h3 {
   color: #618c76;
   font-weight: 500;
 }
-
-#login {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-
-.homeButton {
-  width: 120px;
-  text-decoration: none;
-  background-color: white;
-  color: black;
-  font-size: smaller;
-  font-weight: 500;
-  border: solid 1px;
-  padding: 5px 8px 5px 8px;
-  font-family: "karla", serif;
-  font-size: 1em;
-  display: flex;
-  justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.homeButton:hover {
-  background-color: #cce4c7;
-}
-
-/********* FORUM **********/
-
-#forum {
-  margin: 60px 150px;
-}
-
-
-#ListCat {
-  margin-bottom: 40px;
-}
-
-
-.categoryItem {
-  width: 200px;
-  margin-top: 50px;
-  margin-right: 20px;
-  text-decoration: none;
-  font-family: "Karla", serif;
-  color: black;
-  background-color: white;
-  border: solid 1px;
-  padding: 10px 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-
-
-.forumCat {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.forumCat h1 {
-  margin-bottom: 30px;
-}
-
-#listing {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-  }
-
 
 /********* FORMULAIRES *********/
 
@@ -171,12 +240,12 @@ h3{
   border: solid gray 0.5px;
   padding: 20px;
   width: 345px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 2px;
-  
 }
 
-.forumForm form{
+.forumForm form {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -199,7 +268,7 @@ h3{
 .sendButton {
   width: 80px;
   text-decoration: none;
-  background-color: #FF912C;
+  background-color: #ff912c;
   color: black;
   font-size: smaller;
   font-weight: 500;
@@ -219,6 +288,25 @@ h3{
   cursor: pointer;
 }
 
+.profileSection {
+  width: 40%;
+  margin-top: 10px;
+}
+
+.profileDetails {
+  font-size: 1.3em;
+  margin: 20px 0 20px 0;
+}
+
+.profileLink a {
+  color: black;
+  font-family: "Karla", serif;
+  font-weight: 500;
+  text-decoration: none;
+  border: solid 1px;
+  padding: 2px 5px;
+  margin-right: 20px;
+}
 
 /********* FOOTER *********/
 

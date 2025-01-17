@@ -3,35 +3,48 @@
     $posts = $result["data"]['posts'];
 
 ?>
+
+<h1>TOPIC "<?= htmlspecialchars($topic->getTopicName()) ?>"</h1>
+
 <div class="forumCat">
-<h1>Posts pour le topic <?= htmlspecialchars($topic->getTopicName()) ?></h1>
-<div id="listing">
-<?php if (!empty($posts)): ?>
-    <?php foreach ($posts as $post): ?>
+
+    <div id="listingPost">
         <?php
-            echo "<p class='paraLine'><a class='title' href=\"#\">" . $post->getPostContent() . "</a> publié par " . 
-            $post->getMembre()->getPseudo() . " le " . 
-            $post->getPostDateFormat() . "</p>";
+        $isFirstPost = true; // Utilisé pour détecter le premier post
+        foreach ($posts as $post) {
+            echo "<div class='postLine'>
+                    <a class='title' href=\"#\">" .
+                htmlspecialchars($post->getPostContent()) . "
+                    </a>
+                <p class='detailPost'>publié par " .
+                htmlspecialchars($post->getMembre()->getPseudo()) . " le " .
+                $post->getPostDateFormat() . "</p>
+            </div>";
+
+            // Afficher le titre après le premier post
+            if ($isFirstPost) {
+                echo "<h2>Réponses au post initial</h2>";
+                $isFirstPost = false; // Ne plus afficher le titre pour les suivants
+            }
+        }
         ?>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>Aucun post trouvé pour ce topic.</p>
-<?php endif; ?>
+    </div>
 
 
-<div class="forumForm">
-<h2>Ajouter un nouveau post</h2>
+    <div class="forumForm">
+    <h2>Ajouter un nouveau post</h2>
 
-<form method="POST" action="index.php?ctrl=forum&action=createPost&topicId=<?= $topic->getId() ?>">
+    <form method="POST" action="index.php?ctrl=forum&action=createPost&topicId=<?= $topic->getId() ?>">
 
-    
-    <textarea class="areaForm" name="postContent" placeholder="Écrivez votre message ici..." required></textarea>
+        
+        <textarea class="areaForm" name="postContent" placeholder="Écrivez votre message ici..." required></textarea>
 
-    <!-- On passe l'ID du topic comme champ caché -->
-    <input type="hidden" name="topic_id" value="<?= $topic->getId() ?>">
+        <!-- On passe l'ID du topic comme champ caché -->
+        <input type="hidden" name="topic_id" value="<?= $topic->getId() ?>">
 
 
-    <button class='sendButton' type="submit">Publier</button>
-</form>
-</div>
+        <button class='sendButton' type="submit">Publier</button>
+    </form>
+    </div>
+
 </div>

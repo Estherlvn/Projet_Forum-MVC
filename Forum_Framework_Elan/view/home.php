@@ -1,5 +1,7 @@
 <?php
     $topics = $result["data"]['topics']; 
+    $categories = $result["data"]['categories']; 
+
 ?>
 
 <main>
@@ -18,9 +20,20 @@
     </section>
 
 
+    <section class="sectionCat">
+    
+        <?php
+        foreach($categories as $category ){ ?>
+        <a class= "homeCat" href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>">
+            <?= $category->getCategoryName() ?></a>
+
+        <?php }
+         ?>
+    </section>
+
 
     <section class="homeS1">    
-    <h3>Liste des derniers topics</h3><br>
+    <h3>Les derniers topics</h3><br>
 
     <div class="forumCat">
         <div id="listing">

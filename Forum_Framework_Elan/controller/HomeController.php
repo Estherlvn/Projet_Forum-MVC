@@ -5,6 +5,8 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
+use Model\Managers\CategoryManager;
+
 
 class HomeController extends AbstractController implements ControllerInterface {
 
@@ -35,4 +37,28 @@ class HomeController extends AbstractController implements ControllerInterface {
             ]
         ];
     }
-}
+
+
+        public function home()
+        {
+            // Récupération des catégories
+            $categoryManager = new CategoryManager();
+            $categories = $categoryManager->findAll(["categoryName", "ASC"]);
+    
+            // Récupération des topics
+            $topicManager = new TopicManager();
+            $topics = $topicManager->findAll(["topicDate", "DESC"]);
+    
+            // Retourne les données à la vue
+            return [
+                "view" => VIEW_DIR . "home.php",
+                "meta_description" => "Page d'accueil du forum",
+                "data" => [
+                    "categories" => $categories,
+                    "topics" => $topics
+                ]
+            ];
+        }
+    }
+    
+    

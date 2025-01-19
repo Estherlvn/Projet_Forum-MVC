@@ -20,4 +20,6 @@
             </div>
         <?php endforeach; ?>
     </div>
+
+    <img id="imgJardin" src="/Projet_Forum-MVC/Forum_Framework_Elan//public/img/jardin.png" alt="Voiture">
 </div>

@@ -24,6 +24,8 @@ foreach($topics as $topic) {
 </div>
 
 
+
+
 <div class="forumForm">
     <h2>Créer un nouveau topic</h2>
 

@@ -51,47 +51,62 @@ final class Topic extends Entity {
         $this->topicName = $topicName;
         return $this;
     }
+/**
+ * Get the value of topicDate
+ */
+public function getTopicDate() {
+    return $this->topicDate;
+}
 
-    /**
-     * Get the value of topicDate
-     */
-    public function getTopicDate() {
-        return $this->topicDate;
-    }
+/**
+ * Get the formatted topicDate with time zone conversion
+ */
+public function getTopicDateFormat() {
+    // Utiliser UTC comme timezone d'origine si votre base de données est en UTC
+    $date = new \DateTime($this->topicDate, new \DateTimeZone('UTC'));
+    // Convertir en timezone Europe/Paris
+    $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+    return $date->format('d-m-Y H:i');
+}
 
-    public function getTopicDateFormat() {
-        $date = new \DateTime($this->topicDate);
-        return $date->format('d-m-Y H:i');
-    }
+/**
+ * Set the value of topicDate
+ *
+ * @param string $topicDate Format de date en chaîne
+ * @return self
+ */
+public function setTopicDate($topicDate) {
+    $this->topicDate = $topicDate;
+    return $this;
+}
 
-    /**
-     * Set the value of topicDate
-     *
-     * @param \DateTime $topicDate
-     * @return self
-     */
-    public function setTopicDate($topicDate) {
-        $this->topicDate = $topicDate;
-        return $this;
-    }
 
-    /**
-     * Get the value of topicStatus
-     */
-    public function getTopicStatus() {
-        return $this->topicStatus;
-    }
+   /**
+ * Get the value of topicStatus
+ */
+public function getTopicStatus() {
+    return $this->topicStatus;
+}
 
-    /**
-     * Set the value of topicStatus
-     *
-     * @param bool $topicStatus
-     * @return self
-     */
-    public function setTopicStatus($topicStatus) {
-        $this->topicStatus = $topicStatus;
-        return $this;
-    }
+/**
+ * Set the value of topicStatus
+ *
+ * @param bool $topicStatus
+ * @return self
+ */
+public function setTopicStatus($topicStatus) {
+    $this->topicStatus = $topicStatus;
+    return $this;
+}
+
+/**
+ * Check if the topic is open
+ *
+ * @return bool
+ */
+public function isOpen() {
+    return $this->topicStatus == 1;
+}
 
     /**
      * Get the value of membre

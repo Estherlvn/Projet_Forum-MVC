@@ -14,11 +14,18 @@
 
      
         <?php if (empty($_SESSION['user'])): ?>
-        <div id="login">
-           <a class="homeButton" href="index.php?ctrl=security&action=login">Connexion</a> 
-           <a class="homeButton" href="index.php?ctrl=security&action=register">Inscription</a>
-        </div>
-        <?php endif; ?>
+    <div id="login">
+       <a class="homeButton" href="index.php?ctrl=security&action=login">Connexion</a> 
+       <a class="homeButton" href="index.php?ctrl=security&action=register">Inscription</a>
+    </div>
+<?php else: ?>
+    <div id="login">
+       <p id="bienvenue">Bienvenue, <?= htmlspecialchars($_SESSION['user']->getPseudo()) ?> !</p>
+       <a class="homeButton" href="index.php?ctrl=security&action=logout">Déconnexion</a>
+    </div>
+<?php endif; ?>
+
+
 
 
     </section>

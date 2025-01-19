@@ -110,7 +110,6 @@ final class User extends Entity{
         return $date->format('d-m-Y H:i');
     }
 
-
     /**
      * Get the value of role
      */ 

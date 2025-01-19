@@ -37,10 +37,21 @@ final class Post extends Entity {
         return $this->postDate;
     }
 
+    // public function getPostDateFormat() {
+    //     $date = new \DateTime($this->postDate);
+    //     return $date->format('d-m-Y H:i');
+    // }
+
     public function getPostDateFormat() {
-        $date = new \DateTime($this->postDate);
+        // Créer un objet DateTime en utilisant la date au format UTC de la base de données
+        $date = new \DateTime($this->postDate, new \DateTimeZone('UTC'));
+    
+        // Convertir cette date en heure locale (par exemple Europe/Paris)
+        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+    
         return $date->format('d-m-Y H:i');
     }
+    
 
     public function setPostDate($postDate) {
         $this->postDate = $postDate;

@@ -91,6 +91,7 @@ class ForumController extends AbstractController implements ControllerInterface{
          ];
     }
 
+    
     public function listMembres() {
         $userManager = new MembreManager();
         // Récupérer tous les membres
@@ -105,8 +106,6 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-
-
 
 
 

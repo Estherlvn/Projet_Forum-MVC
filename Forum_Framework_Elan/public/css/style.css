@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+}
+
+#wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 /******* HOMEPAGE *******/
 
 .navbar {
@@ -28,7 +39,6 @@
 .homeS1 {
   display: flex;
   flex-direction: column;
-  margin: 60px;
   font-family: "Kulim Park", serif;
   font-weight: 550;
 }
@@ -51,33 +61,36 @@
   max-width: 300px;
   height: auto;
   margin-top: 20px;
-  margin-left: 45%;
+  margin-left: 50%;
   position: absolute;
 }
 
 .sectionCat {
-  margin: 60px;
+  display: flex;
+  margin: 20px 0 50px 0;
 }
 
-/* .sectionCat h3 {
-  font-size: 1.5em;
-  font-family: "Kulim Park", serif;
-  margin-bottom: 20px;
-} */
-
 .homeCat {
-  width: 500px;
+  text-align: center;
+  width: 16%;
   margin-top: 50px;
   margin-right: 20px;
   text-decoration: none;
   color: white;
   border: solid rgb(73, 71, 71) 0.5px;
   font-family: "Karla", serif;
+  font-size: 1.2em;
   background-image: url("../img/planche.png");
   border-radius: 2px;
   padding: 10px 30px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  transition: transform 0.3s ease;
+}
+
+.homeCat:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 #login {
@@ -111,7 +124,9 @@
 /********* FORUM **********/
 
 #forum {
-  margin: 60px 150px;
+  display: flex;
+  flex-direction: column;
+  margin: 70px 200px;
 }
 
 #ListCat {
@@ -366,7 +381,7 @@ h3 {
   display: flex;
   justify-content: center;
   background-color: #618c76;
-  height: 50px;
+  height: 100px;
 }
 
 #footer p {

@@ -1,7 +1,6 @@
 <?php
     $topics = $result["data"]['topics']; 
     $categories = $result["data"]['categories']; 
-
 ?>
 
 <main>
@@ -57,10 +56,12 @@
                         <?= htmlspecialchars($topic->getCategory()->getCategoryName()) ?> |
                         <?= htmlspecialchars($topic->getTopicDateFormat()) ?> |
                         <?= htmlspecialchars($topic->getMembre()->getPseudo()) ?> |
+
                         <!-- Condition pour afficher un cadenas si le topic est fermé -->
                         <?php if (!$topic->isOpen()): ?>
                             <img src="public/img/locked.png" alt="Topic fermé" class="locked-icon" />
                         <?php endif; ?>
+
                     </p>
                 </div>
             <?php endforeach; ?>

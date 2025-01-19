@@ -204,6 +204,38 @@ public function createPost() {
     }
 }
 
+
+// FAIRE BASCULER LE STATUT DU TOPIC (0 ou 1 - ouvert ou fermé)
+public function toggleTopicStatus() {
+    // Vérifier si l'utilisateur est connecté et autorisé à modifier ce topic
+    $this->restrictToUser();
+
+    $topicId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+    if ($topicId) {
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findById($topicId);
+
+        if ($topic && $topic->getMembre()->getId() == Session::getUser()->getId()) {
+            // Bascule du statut du topic (de 0 à 1 ou de 1 à 0)
+            $newStatus = ($topic->getTopicStatus() == 1) ? 0 : 1;
+            $topic->setTopicStatus($newStatus);
+            
+            // Mettre à jour le topic dans la base de données
+            $topicManager->update($topic);
+
+            // Rediriger l'utilisateur vers la page du topic ou liste de topics
+            $this->redirectTo("forum", "listPostsByTopic", $topicId);
+        } else {
+            Session::addFlash('error', 'Vous ne pouvez pas modifier ce topic.');
+            $this->redirectTo("forum", "listTopicsByCategory", $topic->getCategoryId());
+        }
+    } else {
+        Session::addFlash('error', 'Topic non trouvé.');
+        $this->redirectTo("forum", "listCategories");
+    }
+}
+
     
     
 }

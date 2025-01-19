@@ -83,6 +83,10 @@ body {
   position: absolute;
 }
 
+.locked-icon {
+  height: 20px;
+}
+
 .sectionCat {
   display: flex;
   margin: 20px 0 50px 0;

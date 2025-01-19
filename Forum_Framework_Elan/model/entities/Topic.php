@@ -80,9 +80,10 @@ public function setTopicDate($topicDate) {
     return $this;
 }
 
-
-   /**
+/**
  * Get the value of topicStatus
+ *
+ * @return int 0 for open, 1 for closed
  */
 public function getTopicStatus() {
     return $this->topicStatus;
@@ -91,22 +92,23 @@ public function getTopicStatus() {
 /**
  * Set the value of topicStatus
  *
- * @param bool $topicStatus
+ * @param int $topicStatus 0 for open, 1 for closed
  * @return self
  */
 public function setTopicStatus($topicStatus) {
-    $this->topicStatus = $topicStatus;
+    $this->topicStatus = (int)$topicStatus;
     return $this;
 }
 
 /**
  * Check if the topic is open
  *
- * @return bool
+ * @return bool True if open, false if closed
  */
 public function isOpen() {
-    return $this->topicStatus == 1;
+    return $this->topicStatus === 0;
 }
+
 
     /**
      * Get the value of membre

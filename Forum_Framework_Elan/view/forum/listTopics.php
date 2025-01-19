@@ -7,21 +7,29 @@
 <h1>Liste des topics <br> Catégorie : <?= htmlspecialchars($category->getCategoryName()) ?></h1>
 
 <div class="forumCat">
-<div id="listing">
-<?php
-foreach($topics as $topic) {
-
-    echo "<div class='topicLine'>
-            <a class='title' href=\"index.php?ctrl=forum&action=listPostsByTopic&id=" . $topic->getId() . "\">
-                " . htmlspecialchars($topic->getTopicName()) . "
-            </a>
-         
-          <p class='details'>créé par " . 
-          htmlspecialchars($topic->getMembre()->getPseudo()) . 
-          " le " . $topic->getTopicDateFormat() . "</p>" . "</div>" ;
-}
-?>
+    <div id="listing">
+        <?php
+        foreach ($topics as $topic) {
+            // Inclure la logique : 0 = ouvert, 1 = fermé
+            $isClosed = $topic->getTopicStatus() == 1; // Supposant 0 = ouvert, 1 = fermé
+            
+            echo "<div class='topicLine'>
+                    <a class='title' href=\"index.php?ctrl=forum&action=listPostsByTopic&id=" . $topic->getId() . "\">
+                        " . htmlspecialchars($topic->getTopicName()) . "
+                    </a>
+                    <p class='details'>
+                        Créé par " . htmlspecialchars($topic->getMembre()->getPseudo()) . 
+                        " le " . $topic->getTopicDateFormat();
+            if ($isClosed) {
+                echo " <img src='public/img/locked.png' alt='Fermé' title='Ce topic est fermé' class= 'locked-icon'>";
+            }
+            echo "</p></div>";
+        }
+        ?>
+    </div>
 </div>
+
+
 
 
 

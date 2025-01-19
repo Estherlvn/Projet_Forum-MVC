@@ -10,7 +10,7 @@
 
         <h1>eQuotidien</h1>
         <h2>Un forum pour tous, qui facilite la vie de chacun</h2>
-        <img id="imgVoiture" src="/Projet_Forum-MVC/Forum_Framework_Elan//public/img/voiture.png" alt="Voiture">
+        <img id="imgVoiture" src="/Projet_Forum-MVC/Forum_Framework_Elan/public/img/voiture.png" alt="Voiture">
 
      
         <?php if (empty($_SESSION['user'])): ?>
@@ -21,7 +21,6 @@
 <?php else: ?>
     <div id="login">
        <p id="bienvenue">Bienvenue, <?= htmlspecialchars($_SESSION['user']->getPseudo()) ?> !</p>
-       <a class="homeButton" href="index.php?ctrl=security&action=logout">Déconnexion</a>
     </div>
 <?php endif; ?>
 
@@ -57,7 +56,11 @@
                     <p class="details">
                         <?= htmlspecialchars($topic->getCategory()->getCategoryName()) ?> |
                         <?= htmlspecialchars($topic->getTopicDateFormat()) ?> |
-                        <?= htmlspecialchars($topic->getMembre()->getPseudo()) ?>
+                        <?= htmlspecialchars($topic->getMembre()->getPseudo()) ?> |
+                        <!-- Condition pour afficher un cadenas si le topic est fermé -->
+                        <?php if (!$topic->isOpen()): ?>
+                            <img src="public/img/locked.png" alt="Topic fermé" class="locked-icon" />
+                        <?php endif; ?>
                     </p>
                 </div>
             <?php endforeach; ?>
@@ -65,6 +68,7 @@
         </div>
     </div>
 </section>
+
 
 
 

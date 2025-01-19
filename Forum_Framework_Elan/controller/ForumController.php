@@ -91,7 +91,7 @@ class ForumController extends AbstractController implements ControllerInterface{
          ];
     }
 
-    
+
     public function listMembres() {
         $userManager = new MembreManager();
         // Récupérer tous les membres
@@ -143,7 +143,8 @@ public function createTopic() {
             $topicId = $topicManager->add([
                 'topicName' => $topicName,
                 'category_id' => $categoryId,
-                'membre_id' => $membre->getId()  // Utilisation de l'ID du membre connecté
+                'membre_id' => $membre->getId(),  // Utilisation de l'ID du membre connecté
+                'topicStatus' => 0  // Statut par défaut : ouvert
             ]);
 
             if ($topicId) {

@@ -14,12 +14,16 @@
                 </a>
                 <p class="details">
                     Créé par 
-    <?= $topic->getMembre() ? htmlspecialchars($topic->getMembre()->getPseudo()) : 'Utilisateur inconnu' ?> 
-    le <?= htmlspecialchars($topic->getTopicDateFormat()) ?>
-</p>
+                    <?= $topic->getMembre() ? htmlspecialchars($topic->getMembre()->getPseudo()) : 'Utilisateur inconnu' ?> 
+                    le <?= htmlspecialchars($topic->getTopicDateFormat()) ?>
+
+                    <!-- Condition pour afficher le cadenas si le topic est fermé -->
+                    <?php if ($topic->getTopicStatus() == 1): ?> <!-- Si le topic est fermé -->
+                        <img src="public/img/locked.png" alt="Topic fermé" class="locked-icon" />
+                    <?php endif; ?>
+                </p>
             </div>
         <?php endforeach; ?>
     </div>
-
-    <img id="imgJardin" src="/Projet_Forum-MVC/Forum_Framework_Elan//public/img/jardin.png" alt="Voiture">
 </div>
+

@@ -69,5 +69,16 @@ class TopicManager extends Manager{
             $this->className
         );
     }
+
+    public function update($topicId, $topicStatus) {
+        $sql = "UPDATE topic SET topicStatus = :status WHERE id_topic = :id";
+        $params = [
+            ':status' => $topicStatus,
+            ':id' => $topicId
+        ];
+    
+        return DAO::update($sql, $params); // Utilisation de la méthode update du DAO
+    }
+    
     
 }
